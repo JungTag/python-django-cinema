@@ -20,5 +20,6 @@ from user import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
-    path('db/', views.initialize_DB),
+    path('db/', views.update_DB),
+    path('genre/', views.make_genre),
 ]
