@@ -27,13 +27,12 @@ class Movie(models.Model):
     grade = models.CharField(max_length=50)
     running_time = models.IntegerField()
     score = models.FloatField()
-    released_date = models.DateField()
-    total_audience = models.IntegerField()
+    released_date = models.IntegerField(null=True)
     genre = models.ForeignKey(Genre, related_name="movie", on_delete = models.CASCADE)
     is_excepted = models.BooleanField(default=False)
     is_rereleased = models.BooleanField(default=False)
     total_num = models.IntegerField(default=0)
-    
+
     def __str__(self):
         return self.title
 

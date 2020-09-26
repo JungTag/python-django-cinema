@@ -19,7 +19,10 @@ from user import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('db/', views.update_DB),
-    path('genre/', views.make_genre),
+    path('', views.main, name='main'),
+    path('db/', views.update_DB, name='db'),
+    path('genre/', views.make_genre, name='genre'),
+    path('login/', views.login, name='login'),
+    path('signup/', views.signup, name='signup'),
+    path('activate/<str:uidb64>/<str:token>/', views.activate, name="activate"),
 ]
