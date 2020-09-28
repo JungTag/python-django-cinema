@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 200px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form method="GET" action="{% url 'recommend' %}">
+        <p2>장르로 영화를 검색하세요.</p2>
+        <br>
+        <input type="text" name="keyword">
+        <button class="submit">검색</button>
+    </form>
+    {% if is_searched == False %}
+    <h1>Random top100</h1>
+    {% else %}
+    <h1>{{keyword}}</h1>
+    <a href='{% url "recommend" %}'>모든 영화 추천보기</a>
+    {% endif %}
+    <br>
+    {% for result in results %}
+    {{result}}
+    <img src={{result.poster_url}}>
+    {% endfor %}
+</body>
+</html>

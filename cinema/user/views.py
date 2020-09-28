@@ -189,5 +189,14 @@ def get_random_movies():
 
     return movie_list
 
-# def get_random_movies_by_genre(keyword):
-#     Movie.objects.filter(genre.name=keyword)
+
+def recommend(request):
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        results = Movie.objects.all().filter(genre__name__contains=keyword)
+        is_searched =True
+    else:
+        results = get_random_movies()
+        keyword = None
+        is_searched = False
+    return render(request, 'recommend.html', {'results' : results, 'is_searched' : is_searched, 'keyword' : keyword})

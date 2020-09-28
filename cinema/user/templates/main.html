@@ -4,18 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        img {
-            width: 200px;
-            height: 300px;
-        }
-    </style>
 </head>
 <body>
     top10
-    {% for result in results %}
-    {{result}}
-    <img src={{result.poster_url}}>
-    {% endfor %}
+    <br>
+    <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>
 </body>
 </html>
