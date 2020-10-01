@@ -4,11 +4,24 @@ from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen
 # from datetime import datetime, timedelta
 from .models import UserExtension, Movie, Genre, Vote
-from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib import auth
 import requests
 import json
 import time
-# import ssl
+import ssl
+import asyncio
+from django.http import HttpResponse
+from django.db.models import Max
+import random
+
+# 가입 시 이메일 인증 관련
+from django.contrib.sites.shortcuts import get_current_site
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode,urlsafe_base64_decode
+from django.core.mail import EmailMessage
+from django.utils.encoding import force_bytes, force_text
+from .tokens import account_activation_token
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +39,8 @@ def make_genre(request):
     return redirect('/')
 
 def update_DB(request):
-    PAGE = 40
+    # PAGE = 40
+    PAGE = 10
     base_url = "https://movie.naver.com"
     genre_name = {'드라마':1, '판타지':2, '서부':3, '공포':4, '로맨스':5, '모험':6, '스릴러':7, '느와르':8, '컬트':9, '다큐멘터리':10, '코미디':11, '가족':12, '미스터리':13, '전쟁':14, '애니메이션':15, '범죄':16, '뮤지컬':17, 'SF':18, '액션':19, '무협':20, '에로': 21, '서스펜스':22, '서사':23, '블랙코미디':24, '실험':25, '영화카툰':26, '영화음악':27, '영화패러디포스터':28, '멜로/로맨스':29}
 
@@ -88,93 +102,101 @@ def update_DB(request):
     print("done!")
     return HttpResponse(200)
 
-    '''
-    # 기본 설정
-    baseurl = "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList"
-    movies = {}
-    NAVER_URL = "https://openapi.naver.com/v1/search/movie.json"
-    secrets = json.loads(open(SECRET_FILE).read())
-    API_KEY = secrets["KOBIS"]["API_KEY"]
-    CLIENT_ID = secrets["NAVER"]["CLIENT_ID"]
-    CLIENT_SECRET = secrets["NAVER"]["CLIENT_SECRET"]
-    HEADERS = {
-        "X-Naver-Client-Id": CLIENT_ID,
-        "X-Naver-Client-Secret": CLIENT_SECRET,
-    }  
+def main(request):
+    results = get_random_movies()
+    
+    return render(request, 'main.html', {'results' : results})
 
-    # 영화진흥위원회
-    all_movies = Movie.objects.all()
-    for i in range(11, 52): # 1년당 52주 // 0~51까지 처리
-        targetDt = datetime(2018, 12, 31) - timedelta(weeks=i)
-        targetDt = targetDt.strftime('%Y%m%d')
-        key = API_KEY              
-        api_url = f'{baseurl}?key={key}&targetDt={targetDt}&weekGb=1'
-        response = requests.get(api_url).json()
-        result = response.get('boxOfficeResult').get('weeklyBoxOfficeList')
-        for value in result:
-            flag = 0
-            if movies.get(value['movieCd']) == None:  # 영화 정보가 없으면
-                for i in range(len(all_movies)): # 모든 영화를 탐색해서 중복을 검사한다
-                    if str(all_movies[i]) == value['movieNm']:
-                        flag = 1
-                        break
-                if flag == 0:
-                    movies[value['movieCd']] = [value['movieNm'], value['audiAcc'], value['openDt']]  
-                    # movies[영화번호] = [영화 이름, 누적관객수, 개봉일]  
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = auth.authenticate(request, username=username, password=password)
+        if user is not None:
+            auth.login(request, user)
+            return redirect('main')
+        else:
+            return render(request, 'login.html', {'error' : '아이디 혹은 비밀번호가 올바르지 않습니다.'})
+    
+    return render(request, 'login.html')
 
-    # 네이버
-    for movie_code in movies.keys():
-        query = movies[movie_code][0]  # 검색어 = 영화 이름
-        API_URL = f'{NAVER_URL}?query={query}'
-        time.sleep(0.05)
-        response_naver = requests.get(API_URL, headers = HEADERS).json()
-        result = response_naver['items']
-        for datas in result:
-            if int(datas['pubDate']) <= 2018:
-                try:
-                    # 포스터
-                    naver_code = datas['link']
-                    naver_code = naver_code.split('=')[1]
-                    image_url = f'https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode={naver_code}'
-                    time.sleep(0.05)
-                    response = requests.get(image_url)
-                    new = response.text
-                    soup = BeautifulSoup(new, 'html.parser')
-                    html = BeautifulSoup(response.text, 'html.parser')
-                    img = html.select('img')[0]['src']
-                    # 설명
-                    des = datas['link']
-                    context = ssl._create_unverified_context()  # 의존성 문제 
-                    html = urlopen(des, context = context)
-                    source = html.read()
-                    html.close()
-                    soup = BeautifulSoup(source, 'html.parser')
-                    description = soup.find('p', class_='con_tx')
-                    step = soup.find('dl', 'info_spec')
-                    genre = step.find('a').text
-                    genre_name = {'드라마':1, '판타지':2, '서부':3, '공포':4, '로맨스':5, '모험':6, '스릴러':7, '느와르':8, '컬트':9, '다큐멘터리':10, '코미디':11, '가족':12, '미스터리':13, '전쟁':14, '애니메이션':15, '범죄':16, '뮤지컬':17, 'SF':18, '액션':19, '무협':20, '에로': 21, '서스펜스':22, '서사':23, '블랙코미디':24, '실험':25, '영화카툰':26, '영화음악':27, '영화패러디포스터':28, '멜로/로맨스':29}
-                    grade = step.find_all('dd')[3].find('a').text
-                    running = int(step.find('dd').find_all('span')[2].text[:-2])
-                    movies[movie_code].extend([datas['director'], datas['actor'], datas['userRating'], img, description.get_text(), genre_name.get(genre), grade, running])
-                    movie = Movie()
-                    movie.title = movies[movie_code][0]
-                    movie.total_audience = movies[movie_code][1]
-                    movie.released_date = movies[movie_code][2]
-                    movie.director = movies[movie_code][3]
-                    movie.actor = movies[movie_code][4]
-                    movie.score = movies[movie_code][5]
-                    movie.poster_url = movies[movie_code][6]
-                    movie.description = movies[movie_code][7]
-                    movie.genre = get_object_or_404(Genre, num = movies[movie_code][8])
-                    movie.grade = movies[movie_code][9]
-                    movie.running_time = movies[movie_code][10]
-                    movie.save()
-                    print("Added one movie...")
-                    break
-                except:
-                    break
-    print("done!")
-    '''
+    return render(request, 'login.html')
 
-def index(request):
-    return render(request, 'index.html')
+def signup(request):
+    if request.method == 'POST':
+        if request.POST['password1'] == request.POST['password2']:
+            try:
+                user = User.objects.get(email = request.POST['email_address'])
+                return render(request, 'signup.html', {'error' : '이미 사용 중인 이메일입니다.'})
+            
+            except User.DoesNotExist:
+                user = User.objects.create_user(
+                    username = request.POST['username'],
+                    password = request.POST['password1'],
+                    email = request.POST['email_address'],
+                )
+
+                userextension = UserExtension()
+                userextension.user = user
+                userextension.location = request.POST['location']
+                user.is_active = False
+                user.save()
+                userextension.save()
+
+                current_site = get_current_site(request)
+                message = render_to_string('activation_email.html', {
+                    'user' : user,
+                    'domain' : current_site.domain,
+                    'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+                    'token' : account_activation_token.make_token(user),
+                })
+                mail_title = "siteforsites@gmail.com"
+                mail_to = request.POST['email_address']
+                email = EmailMessage(mail_title, message, to=[mail_to])
+                email.send()
+
+                return render(request, 'login.html')
+        else:
+            return render(request, 'signup.html', {'error' : '비밀번호가 일치하지 않습니다.'})
+        
+
+    return render(request, 'signup.html')
+
+def activate(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.save()
+        auth.login(request, user)
+        return redirect('main')
+    else:
+        return render(request, 'login.html', {'error' : '계정 활성화 오류'})
+
+
+def get_random_movies():
+    max_id = Movie.objects.all().aggregate(max_id=Max('id'))['max_id']
+    movie_list = []
+    while len(movie_list) != 101:
+        pk = random.randint(1, max_id)
+        movie = Movie.objects.filter(pk=pk).first()
+        if movie:
+            if movie not in movie_list:
+                movie_list.append(movie)
+
+    return movie_list
+
+
+def recommend(request):
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        results = Movie.objects.all().filter(genre__name__contains=keyword)
+        is_searched =True
+    else:
+        results = get_random_movies()
+        keyword = None
+        is_searched = False
+    return render(request, 'recommend.html', {'results' : results, 'is_searched' : is_searched, 'keyword' : keyword})

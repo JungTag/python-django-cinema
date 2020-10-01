@@ -32,7 +32,7 @@ class Movie(models.Model):
     is_excepted = models.BooleanField(default=False)
     is_rereleased = models.BooleanField(default=False)
     total_num = models.IntegerField(default=0)
-    
+
     def __str__(self):
         return self.title
 
