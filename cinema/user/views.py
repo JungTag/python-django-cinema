@@ -42,7 +42,7 @@ def make_genre(request):
 
 def update_DB(request):
     # PAGE = 40
-    PAGE = 10
+    PAGE = 40
     base_url = "https://movie.naver.com"
     genre_name = {'드라마':1, '판타지':2, '서부':3, '공포':4, '로맨스':5, '모험':6, '스릴러':7, '느와르':8, '컬트':9, '다큐멘터리':10, '코미디':11, '가족':12, '미스터리':13, '전쟁':14, '애니메이션':15, '범죄':16, '뮤지컬':17, 'SF':18, '액션':19, '무협':20, '에로': 21, '서스펜스':22, '서사':23, '블랙코미디':24, '실험':25, '영화카툰':26, '영화음악':27, '영화패러디포스터':28, '멜로/로맨스':29}
 
@@ -53,9 +53,9 @@ def update_DB(request):
         html = bs(response.text, 'html.parser')
         movies = html.select("div.tit5 a")
         score = html.find("td", {"class" : "point"}).text
-        for moive in movies:
+        for movie in movies:
             try:
-                movie_url = moive['href']
+                movie_url = movie['href']
                 print(movie_url)
                 movie_url = base_url + movie_url
                 response = requests.get(movie_url)
@@ -118,8 +118,6 @@ def login(request):
         else:
             return render(request, 'login.html', {'error' : '아이디 혹은 비밀번호가 올바르지 않습니다.'})
     
-    return render(request, 'login.html')
-
     return render(request, 'login.html')
 
 def signup(request):
@@ -192,7 +190,7 @@ def get_random_movies(*nums):
     movie_list = []
 
     # 영화 DB 받아오면 갯수 수정하기!
-    while len(movie_list) != 1:
+    while len(movie_list) != 5:
         pk = random.randint(1, max_id)
         movie = movies_by_genre.filter(pk=pk).first()
         if movie:
@@ -221,7 +219,7 @@ def recommend(request):
             '다큐멘터리' : get_random_movies(10),
             '애니메이션' : get_random_movies(15),
             '전쟁' : get_random_movies(14),
-            '기타' : get_random_movies(3, 17, 21, 23, 24, 25, 26, 27, 28)
+            # '기타' : get_random_movies(3, 17, 21, 23, 24, 25, 26, 27, 28)
             }
         query = None
         is_searched = False
@@ -252,3 +250,8 @@ def vote(reqeust, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes�
         redirect(next)
     else: # 중복 투표 // alert있었으면 좋겠음
         redirect(next)
+
+
+def detail(request, movie_id):
+    selected_movie = Movie.objects.get(id=movie_id)
+    return render(request, 'detail.html', {'movie' : selected_movie})

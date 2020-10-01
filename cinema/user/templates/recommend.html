@@ -22,7 +22,7 @@
     {% for key, vals in results.items %}
     <h2>{{key}}</h2>
     {% for val in vals %}
-    <img src={{val.poster_url}}>
+    <a href="{% url 'detail' val.id %}"><img src={{val.poster_url}}></a>
     <p>{{val.title}}</p>
     {% endfor %}
     {% endfor %}
