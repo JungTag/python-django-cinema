@@ -19,6 +19,13 @@ from user import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('db/', views.initialize_DB),
+    path('', views.main, name='main'),
+    path('db/', views.update_DB, name='db'),
+    path('genre/', views.make_genre, name='genre'),
+    path('login/', views.login, name='login'),
+    path('signup/', views.signup, name='signup'),
+    path('recommend/',views.recommend, name='recommend'),
+    path('activate/<str:uidb64>/<str:token>/', views.activate, name="activate"),
+    path('vote/<int:movie_id>/', views.vote, name="vote"),
+    path('detail/<int:movie_id>', views.detail, name='detail')
 ]

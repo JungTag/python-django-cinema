@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 200px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <form method="GET" action="{% url 'recommend' %}">
+        <p2>영화를 제목으로 검색하세요.</p2>
+        <br>
+        <input type="text" name="query">
+        <button class="submit">검색</button>
+    </form>
+    {% if is_searched == False %}
+    {% for key, vals in results.items %}
+    <h2>{{key}}</h2>
+    {% for val in vals %}
+    <a href="{% url 'detail' val.id %}"><img src={{val.poster_url}}></a>
+    <p>{{val.title}}</p>
+    {% endfor %}
+    {% endfor %}
+
+    {% else %}
+
+    <h1>{{query}}</h1>
+    <a href='{% url "recommend" %}'>모든 영화 추천보기</a>
+    {% for result in results %}
+    <p>{{result.title}}</p>
+    <img src="{{result.poster_url}}">
+    {% endfor %}
+
+    {% endif %}
+    <br>
+</body>
+</html>
