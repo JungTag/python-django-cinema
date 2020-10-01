@@ -132,11 +132,11 @@ h2 {
   font-size: 14px;
 }
 
-#movies #c1 span {
+.movies .c1 span {
   font-size: 14px;
 }
 
-#movies #c2 h2 {
+.movies .c2 h2 {
   font-size: 14px;
 }
 
@@ -146,38 +146,38 @@ a {
 }
 
 
-#movies div {
+.movies div {
   display: inline-block;
   text-align: center;
 }
 
-#movies div div {
+.movies div div {
   text-align: center;
   margin-right: 20px;
   font-size: 14px;
   width: 184px
 }
 
-#movies div div span {
+.movies div div span {
   width: 50%;
   margin-left: 0px;
 }
 
-#movies #c1{
+.movies .c1{
   text-align: center;
   display: block;
   margin-bottom: 100px;
 }
 
 
-#movies img {
+.movies img {
   margin-bottom: 10px;
   border-radius: 10px;
   width: 184px;
   height: 262px;
 }
 
-#movies #c2 {
+.movies .c2 {
   text-align: center;
   display: block;
   margin-bottom: 100px;
@@ -242,13 +242,13 @@ a {
 }
 
 
-#movies p {
+.movies p {
   margin-left: 220px;
   margin-bottom: 20px;
   font-size: 17px;
 }
 
-#movies .recobutton {
+.movies .recobutton {
   margin-top: 10px;
 }
 
