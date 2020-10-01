@@ -3,7 +3,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen
 from datetime import datetime, timedelta
-from .models import UserExtension, Movie, Genre, Vote
+from .models import UserExtension, Movie, Genre
 from django.contrib.auth.models import User
 from django.contrib import auth
 import requests
@@ -14,6 +14,7 @@ import asyncio
 from django.http import HttpResponse
 from django.db.models import Max
 import random
+from django.db.models import Q
 
 # 가입 시 이메일 인증 관련
 from django.contrib.sites.shortcuts import get_current_site
@@ -103,9 +104,7 @@ def update_DB(request):
     return HttpResponse(200)
 
 def main(request):
-    results = get_random_movies()
-    
-    return render(request, 'main.html', {'results' : results})
+    return render(request, 'main.html')
 
 def login(request):
     if request.method == 'POST':
@@ -177,12 +176,24 @@ def activate(request, uidb64, token):
         return render(request, 'login.html', {'error' : '계정 활성화 오류'})
 
 
-def get_random_movies():
-    max_id = Movie.objects.all().aggregate(max_id=Max('id'))['max_id']
+def get_random_movies(*nums):
+    # 영화 DB 받아오고 장르 구분 수정 고려
+    if len(nums) == 1:
+        movies_by_genre = Movie.objects.filter(genre__num=nums[0])
+    elif len(nums) == 2:
+        movies_by_genre = Movie.objects.filter(Q(genre__num=nums[0]) | Q(genre__num=nums[1]))
+    elif len(nums) == 3:
+        movies_by_genre = Movie.objects.filter(Q(genre__num=nums[0]) | Q(genre__num=nums[1]) | Q(genre__num=nums[2]))
+    else:
+        movies_by_genre = Movie.objects.filter(Q(genre__num=nums[0]) | Q(genre__num=nums[1]) | Q(genre__num=nums[2]) | Q(genre__num=nums[3]) | Q(genre__num=nums[4]) | Q(genre__num=nums[5]) | Q(genre__num=nums[6]) | Q(genre__num=nums[7]) | Q(genre__num=nums[8]))
+    
+    max_id = movies_by_genre.all().aggregate(max_id=Max('id'))['max_id']
     movie_list = []
-    while len(movie_list) != 101:
+
+    # 영화 DB 받아오면 갯수 수정하기!
+    while len(movie_list) != 1:
         pk = random.randint(1, max_id)
-        movie = Movie.objects.filter(pk=pk).first()
+        movie = movies_by_genre.filter(pk=pk).first()
         if movie:
             if movie not in movie_list:
                 movie_list.append(movie)
@@ -191,12 +202,26 @@ def get_random_movies():
 
 
 def recommend(request):
-    if 'keyword' in request.GET:
-        keyword = request.GET['keyword']
-        results = Movie.objects.all().filter(genre__name__contains=keyword)
+    # 영화 제목으로 검색
+    if 'query' in request.GET:
+        query = request.GET['query']
+        #results = Movie.objects.all().filter(genre__name__contains=query)
+        results = Movie.objects.all().filter(title__contains=query)
         is_searched =True
     else:
-        results = get_random_movies()
-        keyword = None
+        results = {
+            '드라마/가족/코미디' : get_random_movies(1, 11, 12),
+            '판타지/모험/SF' : get_random_movies(2, 6, 18),
+            '멜로/로맨스' : get_random_movies(5, 29),
+            '공포/미스터리' : get_random_movies(4, 13, 9),
+            '범죄/느와르' : get_random_movies(16, 8),
+            '액션/무협' : get_random_movies(19, 20),
+            '스릴러/서스펜스' : get_random_movies(7, 22),
+            '다큐멘터리' : get_random_movies(10),
+            '애니메이션' : get_random_movies(15),
+            '전쟁' : get_random_movies(14),
+            '기타' : get_random_movies(3, 17, 21, 23, 24, 25, 26, 27, 28)
+            }
+        query = None
         is_searched = False
-    return render(request, 'recommend.html', {'results' : results, 'is_searched' : is_searched, 'keyword' : keyword})
+    return render(request, 'recommend.html', {'results' : results, 'is_searched' : is_searched, 'query' : query})

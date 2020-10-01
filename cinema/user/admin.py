@@ -5,4 +5,3 @@ from .models import *
 admin.site.register(UserExtension)
 admin.site.register(Movie)
 admin.site.register(Genre)
-admin.site.register(Vote)
