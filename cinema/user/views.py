@@ -3,7 +3,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup as bs
 from urllib.request import urlopen
 # from datetime import datetime, timedelta
-from .models import UserExtension, Movie, Genre, Vote
+from .models import UserExtension, Movie, Genre
 from django.contrib.auth.models import User
 from django.contrib import auth
 import requests
@@ -13,6 +13,7 @@ import ssl
 import asyncio
 from django.http import HttpResponse
 from django.db.models import Max
+from django.contrib.auth.decorators import login_required
 import random
 
 # 가입 시 이메일 인증 관련
@@ -200,3 +201,29 @@ def recommend(request):
         keyword = None
         is_searched = False
     return render(request, 'recommend.html', {'results' : results, 'is_searched' : is_searched, 'keyword' : keyword})
+
+@login_required
+def vote(reqeust, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes일 때 실행되도록
+    movie = get_object_or_404(Movie, id=movie_id)
+    next = request.GET['next']
+    if request.user not in movie.voted_users.all(): # 첫 투표
+        movie.voted_users.add(request.user)
+        user_location = request.user.location
+        if user_location == 1: movie.Seoul += 1
+        elif user_location == 2: movie.North_GyeonGi += 1
+        elif user_location == 3: movie.South_GyeonGi += 1
+        elif user_location == 4: movie.Incheon += 1
+        elif user_location == 5: movie.Gangwon += 1
+        elif user_location == 6: movie.Daejeon += 1
+        elif user_location == 7: movie.ChungCheong += 1
+        elif user_location == 8: movie.Daegu += 1
+        elif user_location == 9: movie.Busan += 1
+        elif user_location == 10: movie.Ulsan += 1
+        elif user_location == 11: movie.GyeongSang += 1
+        elif user_location == 12: movie.Gwangju += 1
+        elif user_location == 13: movie.JeonRa += 1
+        else: movie.Jeju += 1
+        movie.total_num += 1
+        redirect(next)
+    else: # 중복 투표 // alert있었으면 좋겠음
+        redirect(next)
