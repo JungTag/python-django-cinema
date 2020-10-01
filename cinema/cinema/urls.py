@@ -26,4 +26,5 @@ urlpatterns = [
     path('signup/', views.signup, name='signup'),
     path('recommend/',views.recommend, name='recommend'),
     path('activate/<str:uidb64>/<str:token>/', views.activate, name="activate"),
+    path('vote/<int:movie_id>/', views.vote, name="vote"),
 ]
