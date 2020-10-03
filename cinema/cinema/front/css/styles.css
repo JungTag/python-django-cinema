@@ -120,7 +120,7 @@ h3 {
     margin-bottom: 20px;
 }
 
-#movies h3 {
+.movies h3 {
   margin-top: 0px;
   margin-bottom: 35px;
 
@@ -132,13 +132,10 @@ h2 {
   font-size: 14px;
 }
 
-.movies .c1 span {
+.movies .container span {
   font-size: 14px;
 }
 
-.movies .c2 h2 {
-  font-size: 14px;
-}
 
 a {
   text-decoration: none;
@@ -163,7 +160,7 @@ a {
   margin-left: 0px;
 }
 
-.movies .c1{
+.movies .container{
   text-align: center;
   display: block;
   margin-bottom: 100px;
@@ -175,12 +172,6 @@ a {
   border-radius: 10px;
   width: 184px;
   height: 262px;
-}
-
-.movies .c2 {
-  text-align: center;
-  display: block;
-  margin-bottom: 100px;
 }
 
 #category {
