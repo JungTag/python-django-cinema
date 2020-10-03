@@ -1,0 +1,86 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#logintitle {
+    text-align: center;
+    color: #E5E5E5;
+    font: normal normal bold 25px/29px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    opacity: 1;
+    margin-bottom: 35px;
+}
+
+#logintitle button {
+    top: 315px;
+    left: 923px;
+    width: 75px;
+    height: 33px;
+}
+#id {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#id input {
+    top: 385px;
+    left: 797px;
+    width: 327px;
+    height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+
+}
+
+#password {
+    text-align: center;
+    margin-bottom: 70px;
+
+}
+
+#password input {
+    top: 495px;
+    left: 797px;
+    width: 327px;
+    height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+    opacity: 1;
+
+}
+
+.loginbutton {
+    text-align: center;
+}
+
+.loginbutton button{
+    top: 793px;
+    left: 910px;
+    width: 100px;
+    height: 42px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 3px solid #FFFFFF;
+    border-radius: 21px;
+    opacity: 1;
+}
+
+.container {
+    margin-top: 17%;
+}
+
+.container input {
+    background-color: transparent;
+    color: white;
+}
+
+.loginbutton button {
+    background-color: white;
+    color: black;
+}
+.container input::placeholder {
+    color: white;
+    margin-left: 5px;
+    padding-left: 10px;
+}
+

@@ -1,11 +1,51 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+
 <body>
-    {{movie.title}}
+    <div id="navbar">
+        <ul id="left-nav">
+            <li><a href="{% url 'main' %}">홈</a></li>
+            <li><a href="#">추천하기</a></li>
+        </ul>
+        <div id="logo">
+            <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
+        </div>
+        <ul id="right-nav">
+            <li>추천마감까지 D-22</li>
+            {% if user.is_anonymous %}
+            <li><a href="{% url 'login' %}">로그인</a></li>
+            {% else %}
+            <li><a href="{% url 'logout' %}">로그아웃</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <div id="poster">
+        <img src="{{movie.poster_url}}" width="275px" height="393px"><br>
+        <div class="movietitle">{{movie.title}}</div>
+        <div id="num">{{movie.released_date}}</div>
+        <span class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button" value="투표하기"></a></span>
+    </div>
+    <div id="moviecontent">
+        <tr>
+            <td><span class="content">장르: </span><span class="genre">{{movie.genre.name}}</span></td><br>
+            <td><span class="content">감독: </span><span class="directory">{{movie.director}}</span></td><br>
+            <td><span class="content">개봉: </span><span class="date">{{movie.released_date}} 년</span></td><br>
+            <td><span class="content">상영시간: </span><span class="runningtime">{{movie.running_time}} 분</span></td><br>
+            <td><span class="content">연령등급: </span><span class="age">{{movie.grade}}</span></td><br>
+            <td><span class="content">배우: </span><span class="actor">{{movie.actor}}</span></td><br>
+            <td><span class="content">소개: </span><br>
+                <span class="intro">{{movie.description}}</span></td><br>
+        </tr>
+    </div>
 </body>
+
 </html>
