@@ -1,0 +1,150 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#jointitle {
+    text-align: center;
+    color: #E5E5E5;
+    font: normal normal bold 25px/29px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    opacity: 1;
+    margin-bottom: 20px;
+}
+
+#jointitle input{
+    top: 315px;
+    left: 923px;
+    width: 75px;
+    height: 33px;
+}
+
+#id {
+    text-align: center;
+  }
+
+#id input {
+    top: 385px;
+    left: 797px;
+    width: 327px;
+    height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+
+}
+
+#email {
+    text-align: center;
+
+  }
+
+#email input {
+    top: 440px;
+    left: 797px;
+    width: 327px;
+    height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+    opacity: 1;
+
+}
+
+#password {
+    text-align: center;
+
+}
+
+#password input {
+    top: 495px;
+    left: 797px;
+    width: 327px;
+    height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+    opacity: 1;
+
+}
+
+#password2 {
+    text-align: center;
+
+}
+
+#password2 input {
+    top: 550px;
+    left: 797px;
+    width: 327px;
+    height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+    opacity: 1;
+
+}
+
+.local {
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+    opacity: 1;
+    width: 327px;
+    height: 42px;
+
+
+}
+
+.joinbutton {
+    text-align: center;
+}
+
+.joinbutton button {
+    top: 793px;
+    left: 910px;
+    width: 100px;
+    height: 42px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 3px solid #FFFFFF;
+    border-radius: 21px;
+    opacity: 1;
+    color: black;
+}
+
+.local {
+    margin-right: auto;
+    margin-left:auto;
+    margin-bottom: 50px;
+}
+
+.local select {
+    top: 495px;
+    left: 797px;
+    width: 327px;
+    height: 42px;
+    border: 2px solid #FFFFFF;
+    border-radius: 21px;
+}
+
+.container {
+    margin-top: 10%;
+}
+
+.container input {
+    background-color: transparent;
+    color: white;
+}
+
+.joinbutton button {
+    background-color: white;
+    color: black;
+}
+
+.container input::placeholder {
+    color: white;
+
+}
+
+.container select {
+    background-color: transparent;
+}
+
+form input {
+    padding-left: 10px;
+}

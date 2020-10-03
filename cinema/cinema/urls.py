@@ -23,6 +23,7 @@ urlpatterns = [
     path('db/', views.update_DB, name='db'),
     path('genre/', views.make_genre, name='genre'),
     path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
     path('signup/', views.signup, name='signup'),
     path('recommend/',views.recommend, name='recommend'),
     path('activate/<str:uidb64>/<str:token>/', views.activate, name="activate"),

@@ -1,13 +1,54 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>mainpage</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    top10
-    <br>
-    <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>
+  <div id="navbar">
+    <ul id="left-nav">
+      <li><a href="#">홈</a></li>
+      <li><a href="#">추천하기</a></li>
+    </ul>
+    <div id="logo">
+      <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
+    </div>
+    <ul id="right-nav">
+      <li>추천마감까지 D-22</li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'logout' %}">로그아웃</a></li>
+      {% else %}
+      <li><a href="{% url 'login' %}">로그인</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  <div id="bar">
+    <p>재개봉 확인은 롯데시네마 인스타그램에서 </p>
+  </div>
+
+  <div id="topten">
+    <p>8월 TOP 10</p>
+  </div>
+  <div class="movies">
+    <div class="container">
+      {% for movie in top_ten_list_movies %}
+      <div class="recommend_items">
+        <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button" value="투표하기"></a></div>
+      </div>
+      {% endfor %}
+    </div>
+    <div id="gorecommand">
+      <p>TOP 10외에 재개봉을 원하는 영화가 있다면?</p>
+      <p>영화를 찾아 추천해주세요!</p>
+    </div>
+    <div id="mainsearchbar">
+      <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>
+    </div>
 </body>
 </html>
