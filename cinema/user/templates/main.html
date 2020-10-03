@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <body>
+    {% for x in top_ten_list_movies %}
+    {{x.title}}
+    {{x.total_num}}
+    <br>
+    {% endfor %}
     top10
     <br>
     <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>

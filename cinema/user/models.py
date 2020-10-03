@@ -33,7 +33,7 @@ class Movie(models.Model):
     is_excepted = models.BooleanField(default=False)
     is_rereleased = models.BooleanField(default=False)
     # 투표 관련
-    voted_users = models.ManyToManyField(UserExtension)
+    voted_users = models.ManyToManyField(UserExtension, blank=True, related_name='voted_users')
     total_num = models.IntegerField(default=0)
     # 지역
     # {'서울':1, '경기북부':2, '경기남부':3, '인천':4. '강원':5, '대전':6, '충청':7, '대구':8, '부산':9, '울산':10, '경상':11, '광주':12, '전라':13, '제주':14}

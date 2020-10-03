@@ -38,74 +38,81 @@ def make_genre(request):
                 genre.name = name
                 genre.num = i
                 genre.save()
-    return redirect('/')
+    return redirect('main')
 
 def update_DB(request):
     # PAGE = 40
-    PAGE = 40
+    PAGE = 2
     base_url = "https://movie.naver.com"
     genre_name = {'드라마':1, '판타지':2, '서부':3, '공포':4, '로맨스':5, '모험':6, '스릴러':7, '느와르':8, '컬트':9, '다큐멘터리':10, '코미디':11, '가족':12, '미스터리':13, '전쟁':14, '애니메이션':15, '범죄':16, '뮤지컬':17, 'SF':18, '액션':19, '무협':20, '에로': 21, '서스펜스':22, '서사':23, '블랙코미디':24, '실험':25, '영화카툰':26, '영화음악':27, '영화패러디포스터':28, '멜로/로맨스':29}
-
-    for now in range(1, PAGE):
-        url = "https://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=pnt&date=20200924&page=" + str(now)
-        response = requests.get(url)
-        time.sleep(0.05)
-        html = bs(response.text, 'html.parser')
-        movies = html.select("div.tit5 a")
-        score = html.find("td", {"class" : "point"}).text
-        for movie in movies:
-            try:
-                movie_url = movie['href']
-                print(movie_url)
-                movie_url = base_url + movie_url
-                response = requests.get(movie_url)
-                html = bs(response.text, 'html.parser')
-                # image
-                naver_code = movie_url.split('=')[1]
-                image_url = f'https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode={naver_code}'
-                time.sleep(0.05)
-                response = requests.get(image_url)
-                soup = bs(response.text, 'html.parser')
-                img = soup.select('img')[0]['src']            
-                # desc
-                title_tag = html.find('h3', {'class' : "h_movie"})
-                title = title_tag.find('a').text
-                description = html.find('p', class_='con_tx')
-                step = html.find('dl', 'info_spec')
-                date = step.find_all('dd')[0].find('p').find_all('span')[-1].find('a')
-                if date:
-                    released_date = int(date.text.strip())
-                    print(released_date)
-                    if released_date > 2019:
-                        continue
-                else:
-                    print("no date")
-                director = step.find_all('dd')[1].find('a').text
-                actor = step.find_all('dd')[2].find('a').text
-                genre = step.find('a').text
-                genre = genre_name.get(genre)
-                grade = step.find_all('dd')[-1].find('a').text
-                running = int(step.find('dd').find_all('span')[2].text[:-2])
-                new_movie = Movie()
-                new_movie.title = title
-                new_movie.poster_url = img
-                new_movie.director = director
-                new_movie.actor = actor
-                new_movie.description = description.get_text()
-                new_movie.grade = grade
-                new_movie.running_time = running
-                new_movie.score = score
-                new_movie.released_date = released_date
-                new_movie.genre = get_object_or_404(Genre, num = genre)
-                new_movie.save()
-            except:
-                print(f'error: {movie_url}')
-                continue
-    print("done!")
-    return HttpResponse(200)
+    checker = Movie.objects.filter(title="가버나움")
+    if not checker.exists():
+        for now in range(1, PAGE):
+            print(f"PAGE: {now}")
+            url = "https://movie.naver.com/movie/sdb/rank/rmovie.nhn?sel=pnt&date=20200924&page=" + str(now)
+            response = requests.get(url)
+            time.sleep(0.05)
+            html = bs(response.text, 'html.parser')
+            movies = html.select("div.tit5 a")
+            score = html.find("td", {"class" : "point"}).text
+            for movie in movies:
+                try:
+                    movie_url = movie['href']
+                    print(movie_url)
+                    movie_url = base_url + movie_url
+                    response = requests.get(movie_url)
+                    html = bs(response.text, 'html.parser')
+                    # image
+                    naver_code = movie_url.split('=')[1]
+                    image_url = f'https://movie.naver.com/movie/bi/mi/photoViewPopup.nhn?movieCode={naver_code}'
+                    time.sleep(0.05)
+                    response = requests.get(image_url)
+                    soup = bs(response.text, 'html.parser')
+                    img = soup.select('img')[0]['src']            
+                    # desc
+                    title_tag = html.find('h3', {'class' : "h_movie"})
+                    title = title_tag.find('a').text
+                    description = html.find('p', class_='con_tx')
+                    step = html.find('dl', 'info_spec')
+                    date = step.find_all('dd')[0].find('p').find_all('span')[-1].find('a')
+                    if date:
+                        released_date = int(date.text.strip())
+                        if released_date > 2019:
+                            continue
+                    else:
+                        print("no date")
+                    director = step.find_all('dd')[1].find('a').text
+                    actor = step.find_all('dd')[2].find('a').text
+                    genre = step.find('a').text
+                    genre = genre_name.get(genre)
+                    grade = step.find_all('dd')[-1].find('a').text
+                    running = int(step.find('dd').find_all('span')[2].text[:-2])
+                    new_movie = Movie()
+                    new_movie.title = title
+                    new_movie.poster_url = img
+                    new_movie.director = director
+                    new_movie.actor = actor
+                    new_movie.description = description.get_text()
+                    new_movie.grade = grade
+                    new_movie.running_time = running
+                    new_movie.score = score
+                    new_movie.released_date = released_date
+                    new_movie.genre = get_object_or_404(Genre, num = genre)
+                    new_movie.save()
+                except:
+                    print(f'error: {movie_url}')
+                    continue
+        print("done!")
+        return HttpResponse(200)
+    else:
+        redirect('main')
 
 def main(request):
-    return render(request, 'main.html')
+    ordered_movies = Movie.objects.order_by('-total_num')
+    top_ten_list = []
+    for i in range(0,10):
+        top_ten_list.append(ordered_movies[i])
+    return render(request, 'main.html', {'top_ten_list_movies' : top_ten_list})
 
 def login(request):
     if request.method == 'POST':
@@ -225,11 +232,13 @@ def recommend(request):
         is_searched = False
     return render(request, 'recommend.html', {'results' : results, 'is_searched' : is_searched, 'query' : query})
 
+
 @login_required
 def vote(reqeust, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes일 때 실행되도록
     movie = get_object_or_404(Movie, id=movie_id)
     next = request.GET['next']
-    if request.user not in movie.voted_users.all(): # 첫 투표
+    # if request.user not in movie.voted_users.all(): # 첫 투표
+    if not movie.voted_users.filter(user=request.user).exists():
         movie.voted_users.add(request.user)
         user_location = request.user.location
         if user_location == 1: movie.Seoul += 1
@@ -247,6 +256,7 @@ def vote(reqeust, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes�
         elif user_location == 13: movie.JeonRa += 1
         else: movie.Jeju += 1
         movie.total_num += 1
+        movie.save()
         redirect(next)
     else: # 중복 투표 // alert있었으면 좋겠음
         redirect(next)
