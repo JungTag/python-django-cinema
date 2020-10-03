@@ -18,10 +18,10 @@
     </div>
     <ul id="right-nav">
       <li>추천마감까지 D-22</li>
-      {% if user.is_annonymous %}
-      <li><a href="{% url 'login' %}">로그인</a></li>
-      {% else %}
+      {% if user.is_authenticated %}
       <li><a href="{% url 'logout' %}">로그아웃</a></li>
+      {% else %}
+      <li><a href="{% url 'login' %}">로그인</a></li>
       {% endif %}
     </ul>
   </div>

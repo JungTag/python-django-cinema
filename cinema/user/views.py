@@ -239,8 +239,8 @@ def vote(request, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes�
     # next = request.GET['next']
     # if request.user not in movie.voted_users.all(): # 첫 투표
     if not movie.voted_users.filter(user=request.user).exists():
-        movie.voted_users.add(request.user)
-        user_location = request.user.location
+        movie.voted_users.add(request.user.userextension)
+        user_location = request.user.userextension.location
         if user_location == 1: movie.Seoul += 1
         elif user_location == 2: movie.North_GyeonGi += 1
         elif user_location == 3: movie.South_GyeonGi += 1
@@ -257,9 +257,9 @@ def vote(request, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes�
         else: movie.Jeju += 1
         movie.total_num += 1
         movie.save()
-        redirect('main')
+        return redirect('main')
     else: # 중복 투표 // alert있었으면 좋겠음
-        redirect('main')
+        return redirect('main')
 
 
 def detail(request, movie_id):
@@ -268,4 +268,4 @@ def detail(request, movie_id):
 
 def logout(request):
     auth.logout(request)
-    return redirect('main')
+    return redirect('/')
