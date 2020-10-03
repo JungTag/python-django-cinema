@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="searchcontainer">
+        <form action="{% url 'staff_main' %}" method="GET">
+            <input id="searchBar" class="searchbar" type="text"  name="query" placeholder="영화명을 입력해 주세요">
+        </form>
+    </div>
+
+
+    <table>
+        <thead>
+            <tr class="line">
+                <th>영화명</th>
+                <th>개봉</th>
+                <th>투표수</th>
+                <th>제거</th>
+                <th>상영확정</th>
+            </tr>
+        </thead>
+        {% if is_searched  %}
+        <tbody>
+            <form method="GET" action="{% url 'staff_main' %}">
+                {% for result in results %}
+                <tr>
+                    <td>{{result.title}}</td>
+                    <td>{{result.released_date}}</td>
+                    <td>{{result.total_num}}표</td>
+                    <td><span>제거</span> <input type="checkbox"></td>
+                    <td><span>상영확정</span><input type="checkbox"></td>
+                </tr>
+                {% endfor %}
+                <button type="submit">제출</button>
+            </form>
+        </tbody>
+        {% else %}
+        <tbody>
+            <form method="GET" action="{% url 'staff_main' %}">
+                {% for result in results %}
+                <tr>
+                    <td>{{result.title}}</td>
+                    <td>{{result.released_date}}</td>
+                    <td>{{result.total_num}}표</td>
+                    <td><span>제거</span> <input name='deletion' type="checkbox"></td>
+                    <td><span>상영확정</span><input name='re-release_confirmed' type="checkbox"></td>
+                </tr>
+                {% endfor %}
+                <button type="submit">제출</button>
+            </form>
+        </tbody>
+        {% endif %}
+    </table>
+</body>
+</html>

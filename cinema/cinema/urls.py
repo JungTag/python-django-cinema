@@ -24,6 +24,7 @@ urlpatterns = [
     path('update/', user.views.update_DB, name='db'),
     path('genre/', user.views.make_genre, name='genre'),
     path('login/', user.views.login, name='login'),
+    path('logout/', user.views.logout, name='logout'),
     path('signup/', user.views.signup, name='signup'),
     path('recommend/',user.views.recommend, name='recommend'),
     path('activate/<str:uidb64>/<str:token>/', user.views.activate, name="activate"),
@@ -44,4 +45,5 @@ urlpatterns = [
     path('12/', staff.views.gwangju, name='gwangju'),
     path('13/', staff.views.jeonra, name='jeonra'),
     path('14/', staff.views.jeju, name='jeju'),
+    path('staff_main/', staff.views.staff_main, name='staff_main')
 ]

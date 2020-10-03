@@ -151,3 +151,23 @@ def jeju(request):
         vote_count.append(int(ordered_movies[i].Jeju))
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'jeju.html', context=context)
+
+
+def staff_main(request):
+    if 'query' in request.GET:
+        query = request.GET['query']
+        results = Movie.objects.all().filter(title__contains=query)
+        is_searched = True
+    else:
+        ordered_movies = Movie.objects.order_by('-total_num')
+        top_twenty_list = []
+
+        for i in range(0,20):
+            top_twenty_list.append(ordered_movies[i])
+
+        results = top_twenty_list
+        is_searched = False 
+
+    # if 'deletion' in request.GET or 're-release_confirmed' in request.GET:
+
+    return render(request, 'staff_main.html', {'results' : results, 'is_searched' : is_searched})
