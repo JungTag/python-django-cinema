@@ -273,14 +273,20 @@ def logout(request):
 
 def re_release(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
-    movie.is_rereleased = True
+    if not movie.is_rereleased:
+        movie.is_rereleased = True
+    else:
+        movie.is_rereleased = False
     movie.save()
 
     return redirect('detail', movie_id = movie.id)
 
 def deletion(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
-    movie.is_excepted = True
+    if not movie.is_excepted:
+        movie.is_excepted = True
+    else:
+        movie.is_excepted = False
     movie.save()
 
     return redirect('detail', movie_id = movie.id)
