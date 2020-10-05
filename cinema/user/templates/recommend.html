@@ -63,7 +63,7 @@
           <a href="{% url 'detail' result.id %}"><img class="posterimage" src="{{result.poster_url}}"></a><br>
           <div class="movietitle">{{result.title}}</div>
           <div class="audience">{{result.released_date}}</div>
-          <div class="recobutton"><input class="button" type="button" value="투표하기"></div>
+          <div class="recobutton"><a href="{% url 'vote' result.id %}"><input class="button" type="button" value="투표하기"></a></div>
         </div>
         {% endfor %}
       </div>

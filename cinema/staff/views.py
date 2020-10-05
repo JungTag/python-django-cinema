@@ -168,6 +168,6 @@ def staff_main(request):
         results = top_twenty_list
         is_searched = False 
 
-    # if 'deletion' in request.GET or 're-release_confirmed' in request.GET:
-
     return render(request, 'staff_main.html', {'results' : results, 'is_searched' : is_searched})
+
+

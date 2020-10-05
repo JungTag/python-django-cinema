@@ -270,3 +270,17 @@ def detail(request, movie_id):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def re_release(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    movie.is_rereleased = True
+    movie.save()
+
+    return redirect('detail', movie_id = movie.id)
+
+def deletion(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    movie.is_excepted = True
+    movie.save()
+
+    return redirect('detail', movie_id = movie.id)

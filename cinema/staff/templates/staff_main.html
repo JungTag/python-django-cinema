@@ -11,8 +11,6 @@
             <input id="searchBar" class="searchbar" type="text"  name="query" placeholder="영화명을 입력해 주세요">
         </form>
     </div>
-
-
     <table>
         <thead>
             <tr class="line">
@@ -23,35 +21,47 @@
                 <th>상영확정</th>
             </tr>
         </thead>
-        {% if is_searched  %}
+        {% if is_searched  %} <!--검색 했을 때-->
         <tbody>
-            <form method="GET" action="{% url 'staff_main' %}">
-                {% for result in results %}
-                <tr>
-                    <td>{{result.title}}</td>
-                    <td>{{result.released_date}}</td>
-                    <td>{{result.total_num}}표</td>
-                    <td><span>제거</span> <input type="checkbox"></td>
-                    <td><span>상영확정</span><input type="checkbox"></td>
-                </tr>
-                {% endfor %}
-                <button type="submit">제출</button>
-            </form>
+            {% for result in results %}
+            <tr>
+                <td>{{result.title}}</td>
+                <td>{{result.released_date}}</td>
+                <td>{{result.total_num}}표</td>
+                {% if result.is_excepted %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+                {% if result.is_rereleased %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
         </tbody>
-        {% else %}
+        <a href="{% url 'staff_main' %}">Top 20 보기</a>
+        
+        {% else %} <!-- 검색 전 top 20-->
         <tbody>
-            <form method="GET" action="{% url 'staff_main' %}">
-                {% for result in results %}
-                <tr>
-                    <td>{{result.title}}</td>
-                    <td>{{result.released_date}}</td>
-                    <td>{{result.total_num}}표</td>
-                    <td><span>제거</span> <input name='deletion' type="checkbox"></td>
-                    <td><span>상영확정</span><input name='re-release_confirmed' type="checkbox"></td>
-                </tr>
-                {% endfor %}
-                <button type="submit">제출</button>
-            </form>
+            {% for result in results %}
+            <tr>
+                <td>{{result.title}}</td>
+                <td>{{result.released_date}}</td>
+                <td>{{result.total_num}}표</td>
+                {% if result.is_excepted %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+                {% if result.is_rereleased %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
         </tbody>
         {% endif %}
     </table>

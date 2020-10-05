@@ -29,6 +29,10 @@
     </div>
 
     <div id="poster">
+        {% if user.is_staff %}
+        <span class="recobutton"><a href="{% url 're_release' movie.id %}"><input class="button" type="button" value="상영확정"></a></span>
+        <span class="recobutton"><a href="{% url 'deletion' movie.id %}"><input class="button" type="button" value="제거"></a></span>
+        {% endif %}
         <img src="{{movie.poster_url}}" width="275px" height="393px"><br>
         <div class="movietitle">{{movie.title}}</div>
         <div id="num">{{movie.released_date}}</div>
