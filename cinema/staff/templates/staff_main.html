@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="searchcontainer">
+        <form action="{% url 'staff_main' %}" method="GET">
+            <input id="searchBar" class="searchbar" type="text"  name="query" placeholder="영화명을 입력해 주세요">
+        </form>
+    </div>
+    <table>
+        <thead>
+            <tr class="line">
+                <th>영화명</th>
+                <th>개봉</th>
+                <th>투표수</th>
+                <th>제거</th>
+                <th>상영확정</th>
+            </tr>
+        </thead>
+        {% if is_searched  %} <!--검색 했을 때-->
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{result.title}}</td>
+                <td>{{result.released_date}}</td>
+                <td>{{result.total_num}}표</td>
+                {% if result.is_excepted %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+                {% if result.is_rereleased %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        <a href="{% url 'staff_main' %}">Top 20 보기</a>
+        
+        {% else %} <!-- 검색 전 top 20-->
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td>{{result.title}}</td>
+                <td>{{result.released_date}}</td>
+                <td>{{result.total_num}}표</td>
+                {% if result.is_excepted %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+                {% if result.is_rereleased %}
+                <td>O</td>
+                {% else %}
+                <td>X</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% endif %}
+    </table>
+</body>
+</html>

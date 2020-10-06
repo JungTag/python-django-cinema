@@ -38,11 +38,11 @@ def make_genre(request):
                 genre.name = name
                 genre.num = i
                 genre.save()
-    return redirect('/')
+    return redirect('main')
 
 def update_DB(request):
     # PAGE = 40
-    PAGE = 40
+    PAGE = 2
     base_url = "https://movie.naver.com"
     genre_name = {'드라마':1, '판타지':2, '서부':3, '공포':4, '로맨스':5, '모험':6, '스릴러':7, '느와르':8, '컬트':9, '다큐멘터리':10, '코미디':11, '가족':12, '미스터리':13, '전쟁':14, '애니메이션':15, '범죄':16, '뮤지컬':17, 'SF':18, '액션':19, '무협':20, '에로': 21, '서스펜스':22, '서사':23, '블랙코미디':24, '실험':25, '영화카툰':26, '영화음악':27, '영화패러디포스터':28, '멜로/로맨스':29}
     checker = Movie.objects.filter(title='가벼나움')
@@ -233,6 +233,7 @@ def recommend(request):
     
     return render(request, 'recommend.html', {'results' : results, 'is_searched' : is_searched, 'query' : query})
 
+
 @login_required
 def vote(request, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes일 때 실행되도록
     movie = get_object_or_404(Movie, id=movie_id)
@@ -269,3 +270,23 @@ def detail(request, movie_id):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def re_release(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    if not movie.is_rereleased:
+        movie.is_rereleased = True
+    else:
+        movie.is_rereleased = False
+    movie.save()
+
+    return redirect('detail', movie_id = movie.id)
+
+def deletion(request, movie_id):
+    movie = Movie.objects.get(id=movie_id)
+    if not movie.is_excepted:
+        movie.is_excepted = True
+    else:
+        movie.is_excepted = False
+    movie.save()
+
+    return redirect('detail', movie_id = movie.id)

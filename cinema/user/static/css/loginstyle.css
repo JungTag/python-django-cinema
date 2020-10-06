@@ -84,3 +84,7 @@ body {
     padding-left: 10px;
 }
 
+
+.form div input {
+    padding-left: 60px;
+}
