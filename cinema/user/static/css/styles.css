@@ -28,14 +28,15 @@
   height: 60px;
   vertical-align: middle;
   display: block;
-  margin: 0 ;
   text-align: center;
 }
+
 
 #navbar #right-nav {
   float: right;
   padding: 0px;
   margin: 0px;
+  right: 0px;
   line-height: 60px;
   background: #1D1D1F 0% 0% no-repeat padding-box;
   width: 20%;
@@ -90,9 +91,10 @@ background: #EC1A24 0% 0% no-repeat padding-box;
 opacity: 1;
 margin-top: 60px;
 text-align: center;
-color: #E5E5E5;
+color: white;
 vertical-align: middle;
 line-height: 50px;
+left: 0px;
 }
 
 .bar .insta {
@@ -215,24 +217,45 @@ height: 262px;
   margin-top: 230px;
 }
 
+#poster .movietitle {
+  display: inline-block;
+}
+#poster #num {
+  display: inline-block;
+}
+#poster .wrap {
+  text-align: center;
+}
+
+#poster .wrap div {
+  display: inline-block;
+}
+
+#poster .wrap {
+  margin-left: 250px;
+}
+
 #poster img {
 border-radius: 10px;
 }
 
 #poster .recobutton {
-width: 50%;
-width: right;
-margin-left: -30px;
+  display: block;
 }
 
+.detail-button {
+  width: 100%;
+  text-align: center;
+  height: 100px;
+}
+
+.detail-button .recobutton {
+  display: inline;
+  margin-right: 20px;
+}
 #poster span {
 margin-top: 10px;
-}
 
-#moviecontent {
-  width: 50%;
-  margin-top: 230px;
-  display: inline-block;
 }
 
 
@@ -253,7 +276,7 @@ margin-top: 10px;
 }
 
 .recobutton input{
-border: 2px solid #E5E5E5;
+border: 2px solid white;
 border-radius: 29px;
 opacity: 1;
 width: 90px;
@@ -267,6 +290,24 @@ font: normal normal normal 18px Noto Sans;
 letter-spacing: 0px;
 color: #E5E5E5;
 opacity: 1;
+height: 500px;
+width: 50%;
+margin-top: 210px;
+display: inline-block;
+}
+
+#moviecontent .content-div {
+  width: 80%;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+#moviecontent .content-div div {
+  margin-bottom: 10px;
+}
+
+.content-div .content {
+  margin-right: 20px;
 }
 
 #topten{
@@ -315,4 +356,93 @@ text-align: center;
 width: 100%;
 margin-bottom: 328px;
 }
+
+#topten .lotteicon{
+  vertical-align: middle;
+  margin-right: 20px;
+  margin-top: -10px;
+}
+
+.detail-button {
+  margin-top: 30px;
+}
+
+.detail-button .recobutton a{
+  margin-right: 10px;
+}
+
+.recobutton {
+  display:inline-block;
+}
+
+.instagram {
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+#moviecontent tr span{
+  padding-bottom: 100px;
+  color: red;
+}
+
+input:focus {
+  outline: none;
+}
+
+
+/*mainpage*/
+
+.wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display:inline-block;
+  z-index: 99;
+}
+
+.wrapper .count {
+    position: absolute;
+  top:0px;
+  left:0px;
+    width:184px;
+    height:20px;
+    background-color:#8B0000;
+  vertical-align:middle;
+  line-height:20px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+
+.main_movies img {
+  width:184px;
+  border-radius: 5px;
+}
+
+.main_movies div div {
+  float:left;
+  width: 184px;
+  margin-right:30px;
+  text-align:center;
+}
+
+.main_movies .c2 {
+  display:inline-block;
+  margin-bottom: 50px;
+}
+
+.main_movies {
+  text-align:center;
+  width:100%;
+}
+
+.main_movies .c1 {
+  display:inline-block;
+  margin-bottom: 40px;
+}
+
+.wrapper {
+  height: 280px;
+}
+
+
 

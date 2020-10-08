@@ -29,27 +29,57 @@
     </div>
 
     <div id="poster">
-        {% if user.is_staff %}
-        <span class="recobutton"><a href="{% url 're_release' movie.id %}"><input class="button" type="button" value="상영확정"></a></span>
-        <span class="recobutton"><a href="{% url 'deletion' movie.id %}"><input class="button" type="button" value="제거"></a></span>
-        {% endif %}
-        <img src="{{movie.poster_url}}" width="275px" height="393px"><br>
-        <div class="movietitle">{{movie.title}}</div>
-        <div id="num">{{movie.released_date}}</div>
-        <span class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button" value="투표하기"></a></span>
+        <div class="wrap">
+            <img src="{{movie.poster_url}}" width="275px" height="393px"><br>
+            <div class="movietitle">{{movie.title}}</div><br>
+            <div id="audience">{{movie.released_date}}</div><br>
+            <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" onclick="confirm_vote()"
+                        type="button" value="투표하기"></a></div>
+        </div>
     </div>
     <div id="moviecontent">
-        <tr>
-            <td><span class="content">장르: </span><span class="genre">{{movie.genre.name}}</span></td><br>
-            <td><span class="content">감독: </span><span class="directory">{{movie.director}}</span></td><br>
-            <td><span class="content">개봉: </span><span class="date">{{movie.released_date}} 년</span></td><br>
-            <td><span class="content">상영시간: </span><span class="runningtime">{{movie.running_time}} 분</span></td><br>
-            <td><span class="content">연령등급: </span><span class="age">{{movie.grade}}</span></td><br>
-            <td><span class="content">배우: </span><span class="actor">{{movie.actor}}</span></td><br>
-            <td><span class="content">소개: </span><br>
-                <span class="intro">{{movie.description}}</span></td><br>
-        </tr>
+        <div class="content-div">
+            <div><span class="content">장르 </span><span class="genre">{{movie.genre.name}}</span></div><br>
+            <div><span class="content">감독 </span><span class="directory">{{movie.director}}</span></div><br>
+            <div><span class="content">개봉 </span><span class="date">{{movie.released_date}} 년</span></div><br>
+            <div><span class="content">상영시간 </span><span class="runningtime">{{movie.running_time}} 분</span></div><br>
+            <div><span class="content">연령등급 </span><span class="age">{{movie.grade}}</span></div><br>
+            <div><span class="content">배우 </span><span class="actor">{{movie.actor}}</span></div><br>
+            <div><span class="content-intro">소개 </span><br><br>
+                <span class="intro">{{movie.description}}</span></div><br>
+            </tr>
+        </div>
     </div>
-</body>
 
+    {% if user.is_staff %}
+    <div class="detail-button">
+        <div class="recobutton">
+            <a href="{% url 're_release' movie.id %}"><input onclick="confirm_release" type="button" value="상영확정"></a>
+            <a href="{% url 'deletion' movie.id %}"><input onclick="confirm_delete" type="button" value="제거"></a>
+        </div>
+    </div>
+    {% endif %}
+</body>
+<script>
+    function confirm_vote() {
+      var confirm_vote = confirm("투표하시겠습니까? *중복 투표는 불가합니다*");
+      if(confirm_vote == true) {
+        alert("투표되었습니다.");
+      }
+    }
+
+    function confirm_release() {
+      var confirm_release = confirm("이 영화를 상영 확정하시겠습니까?");
+      if(confirm_release == true) {
+        alert("상영 확정되었습니다.");
+      }
+    }
+
+    function confirm_delete() {
+      var confirm_delete = confirm("이 영화를 제외하시겠습니까?");
+      if(confirm_delete == true) {
+        alert("제외되었습니다.");
+      }
+    }
+  </script>
 </html>

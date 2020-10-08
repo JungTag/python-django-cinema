@@ -7,6 +7,30 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+<!-- <script>
+    var recobutton = true;
+    function OnlyOneClick() {
+        if (recobutton) {
+            recobutton = false;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+  function insert() {
+        var confirm_vote = confirm("투표하시겠습니까? *중복 투표는 불가합니다*");
+        var ooc = OnlyOneClick();
+        if ((ooc) && (confirm_vote == true)) {
+            alert("투표되었습니다.");
+        } else {
+            alert("중복투표입니다.");
+        }
+    }
+
+</script> -->
+
+
 <body>
   <div id="navbar">
     <ul id="left-nav">
@@ -25,30 +49,136 @@
       {% endif %}
     </ul>
   </div>
-  <div id="bar">
-    <p>재개봉 확인은 롯데시네마 인스타그램에서 </p>
+  <div class="bar">
+    재개봉 확인은 롯데시네마 인스타그램에서 <img class="instagram" src="{% static 'images/instagram.png' %}" height=25px;>
   </div>
 
   <div id="topten">
+    <img class="lotteicon" src="{% static 'images/lotteicon.png' %}" width="30px">
     <p>8월 TOP 10</p>
   </div>
-  <div class="movies">
-    <div class="container">
-      {% for movie in top_ten_list_movies %}
-      <div class="recommend_items">
-        <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+
+  <div class="main_movies">
+    <div class="c1">
+      <div class="p1">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
         <div class="movietitle">{{movie.title}}</div>
         <div class="audience">{{movie.released_date}}</div>
-        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button" value="투표하기"></a></div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
       </div>
-      {% endfor %}
+      <div class="p2">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
+      <div class="p3">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
+      <div class="p4">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
+      <div class="p5">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
     </div>
-    <div id="gorecommand">
-      <p>TOP 10외에 재개봉을 원하는 영화가 있다면?</p>
-      <p>영화를 찾아 추천해주세요!</p>
+    <div class="c2">
+      <div class="p6">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
+      <div class="p7">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
+      <div class="p8">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
+      <div class="p9">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
+      <div class="p10">
+        <div class="wrapper">
+          <a href="{% url 'detail' movie.id %}"><img class="posterimage" src="{{movie.poster_url}}"></a><br>
+          <div class="count">1위</div>
+        </div>
+        <div class="movietitle">{{movie.title}}</div>
+        <div class="audience">{{movie.released_date}}</div>
+        <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" type="button"
+              value="투표하기"></a></div>
+      </div>
     </div>
-    <div id="mainsearchbar">
-      <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>
-    </div>
+  </div>
+  <div id="gorecommand">
+    <p>TOP 10 외에 재개봉을 원하는 영화가 있다면?</p>
+    <p>영화를 찾아 추천해주세요!</p>
+  </div>
+  <div id="mainsearchbar">
+    <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>
+  </div>
 </body>
+<script>
+  function confirm_vote() {
+    var confirm_vote = confirm("투표하시겠습니까? *중복 투표는 불가합니다*");
+    if (confirm_vote == true) {
+      alert("투표되었습니다.");
+    }
+  }
+</script>
+
 </html>
