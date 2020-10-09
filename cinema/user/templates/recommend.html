@@ -18,6 +18,9 @@
     </div>
     <ul id="right-nav">
       <li>추천마감까지 D-22</li>
+      {% if user.is_staff %}
+      <li><a href="{% url 'staff_main' %}">스태프 페이지 가기</a></li>
+      {% endif %}
       {% if user.is_annonymous %}
       <li><a href="{% url 'login' %}">로그인</a></li>
       {% else %}
