@@ -106,13 +106,13 @@ def update_DB(request):
         return HttpResponse(200)
     else:
         redirect('main')
+
 def main(request):
     ordered_movies = Movie.objects.order_by('-total_num')
     top_ten_list = []
     for i in range(0,10):
         top_ten_list.append(ordered_movies[i])
-
-    return render(request, 'main.html', {'top_ten_list_movies' : top_ten_list})
+    return render(request, 'main.html', {'first' : top_ten_list[0], 'second' : top_ten_list[1], 'third' : top_ten_list[2], 'fourth' : top_ten_list[3], 'fifth' : top_ten_list[4], 'sixth' : top_ten_list[5], 'seventh' : top_ten_list[6], 'eighth' :top_ten_list[7], 'ninth' : top_ten_list[8], 'tenth' : top_ten_list[9]})
 
 def login(request):
     if request.method == 'POST':
