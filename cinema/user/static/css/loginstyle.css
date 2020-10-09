@@ -88,3 +88,7 @@ body {
 .form div input {
     padding-left: 60px;
 }
+
+input:focus {
+    outline: none;
+}
