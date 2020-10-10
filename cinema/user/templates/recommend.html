@@ -44,8 +44,11 @@
       <div class="container">
         <h1 class="tagname">{{key}}</h1>
           {% for val in vals %}
-        <div class="recommend_items">
-          <a href="{% url 'detail' val.id %}"><img class="posterimage" src="{{val.poster_url}}"></a><br>
+        <div class="recommend_items">  
+          <div class="recommend-wrap">        
+            <div class="check">확정</div>
+            <a href="{% url 'detail' val.id %}"><img class="posterimage" src="{{val.poster_url}}"></a>
+          </div><br>
           <div class="movietitle">{{val.title}}</div>
           <div class="audience">{{val.released_date}}</div>
           <div class="recobutton"><a href="{% url 'vote' val.id %}"><input class="button" type="button" value="투표하기"></a></div>
@@ -63,10 +66,10 @@
       <div class="container">
         {% for result in results %}
         <div class="recommend_items">
-          <a href="{% url 'detail' result.id %}"><img class="posterimage" src="{{result.poster_url}}"></a><br>
+          <a href="{% url 'detail' result.id %}"><img class="posterimage" src="{{result.poster_url}}" height="263px"></a><br>
           <div class="movietitle">{{result.title}}</div>
           <div class="audience">{{result.released_date}}</div>
-          <div class="recobutton"><a href="{% url 'vote' result.id %}"><input class="button" type="button" value="투표하기"></a></div>
+          <div class="recobutton"><a href="{% url 'vote' result.id %}"><input onclick="confirm_vote()" class="button" type="button" value="투표하기"></a></div>
         </div>
         {% endfor %}
       </div>
@@ -74,3 +77,12 @@
     {% endif %}
         
 </body>
+<script>
+  function confirm_vote() {
+  var confirm_vote = confirm("투표하시겠습니까? *중복 투표는 불가합니다*");
+  if(confirm_vote == true) {
+    alert("투표되었습니다.");
+  }
+}
+</script>
+</html>
