@@ -237,7 +237,10 @@ def recommend(request):
 @login_required
 def vote(request, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes일 때 실행되도록
     movie = get_object_or_404(Movie, id=movie_id)
-    # next = request.GET['next']
+    if request.method == "POST":
+        next = request.POST["next"]
+    else:
+        next = 'main'
     # if request.user not in movie.voted_users.all(): # 첫 투표
     if not movie.voted_users.filter(user=request.user).exists():
         movie.voted_users.add(request.user.userextension)
@@ -258,14 +261,15 @@ def vote(request, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes�
         else: movie.Jeju += 1
         movie.total_num += 1
         movie.save()
-        return redirect('main')
+        return redirect(next)
     else: # 중복 투표 // alert있었으면 좋겠음
-        return redirect('main')
+        return redirect(next)
 
 
 def detail(request, movie_id):
     selected_movie = Movie.objects.get(id=movie_id)
-    return render(request, 'detail.html', {'movie' : selected_movie})
+    next = request.GET['next']
+    return render(request, 'detail.html', {'movie' : selected_movie, 'next' : next})
 
 def logout(request):
     auth.logout(request)
