@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    <div>
+        <a href="{% url 'total' %}">지역별 통계 바로가기</a>
+    </div>
     <div class="searchcontainer">
         <form action="{% url 'staff_main' %}" method="GET">
             <input id="searchBar" class="searchbar" type="text"  name="query" placeholder="영화명을 입력해 주세요">

@@ -13,7 +13,6 @@
     <div id="navbar">
         <ul id="left-nav">
             <li><a href="{% url 'main' %}">홈</a></li>
-            <li><a href="#">추천하기</a></li>
         </ul>
         <div id="logo">
             <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
@@ -43,17 +42,14 @@
               <a href="{% url 'vote' movie.id %}"><input class="button" onclick="confirm_vote()"
              type="button" value="투표하기"></a>
             </div>
-        </div>
-    </div>
-
-    {% if user.is_staff %}
-    <div class="detail-button">
-        <div class="staff-button">
-            <a href="{% url 're_release' movie.id %}"><input onclick="confirm_release()" class="release-button" type="button" value="상영"></a>
-            <a href="{% url 'deletion' movie.id %}"><input onclick="confirm_delete()" class="delete-button" type="button" value="제거"></a>
-        </div>
-    </div>
-    {% endif %}
+            {% if user.is_staff %}
+            <div class="detail-button">
+                <div class="staff-button">
+                    <a href="{% url 're_release' movie.id %}"><input onclick="confirm_release()" class="release-button" type="button" value="상영"></a>
+                    <a href="{% url 'deletion' movie.id %}"><input onclick="confirm_delete()" class="delete-button" type="button" value="제거"></a>
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
 

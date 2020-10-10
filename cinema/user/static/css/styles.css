@@ -429,6 +429,7 @@ font-size: 18px;
   }
 
   .detail-button {
+    display: inline-block;
     margin-top: 10px;
   }
   .staff-button input {
