@@ -7,7 +7,7 @@
 
 /* navbar */
 #navbar {
-  height: 50px;
+  height: 60px;
   background: #1D1D1F 0% 0% no-repeat padding-box;
   width: 100%;
   position: fixed;
@@ -15,42 +15,37 @@
   left: 0;
   right: 0;
   z-index: 100;
-}
-#navbar #logo {
-  float: left;
-  line-height: 60px;
   text-align: center;
-  height: 60px;
-  width: 50%;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
 }
 
-#navbar #logo-img {
-  height: 60px;
-  vertical-align: middle;
-  display: block;
-  text-align: center;
-}
 
 #navbar a {
   background: #1D1D1F 0% 0% no-repeat padding-box;
 }
 
+#navbar #logo {
+  height: 60px;
+}
+
+
 #navbar #right-nav {
+  display: inline-block;
+  width: 300px;
+  position: absolute;
   float: right;
   padding: 0px;
   margin: 0px;
   right: 0px;
   line-height: 60px;
   background: #1D1D1F 0% 0% no-repeat padding-box;
-  width: 25%;
 }
 
 #navbar #left-nav {
+  position: absolute;
   float: left;
   padding: 0px;
   margin: 0px;
-  width: 25%;
+  width: 20%;
   line-height: 60px;
   background: #1D1D1F 0% 0% no-repeat padding-box;
 }
@@ -94,6 +89,7 @@ color: white;
 vertical-align: middle;
 line-height: 50px;
 left: 0px;
+z-index: 98;
 }
 
 .bar .insta {
@@ -191,7 +187,6 @@ height: 262px;
 }
 
 
-
 .button input {
   border: 3px solid #FFFFFF;
   border-radius: 30px;
@@ -231,6 +226,11 @@ input:focus {
   display:inline-block;
   z-index: 99;
   margin-bottom: 10px;
+}
+
+
+.main-recommend_items {
+  display: ;
 }
 
 
@@ -277,6 +277,7 @@ input:focus {
   
   #mainsearchbar a {
     font-size: 17px;
+    border: 3px;
   }
   
   #topten .lotteicon{
@@ -346,7 +347,7 @@ input:focus {
   width: 50%;
   float: left;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 190px;
   height: 700px;
 }
 
@@ -380,10 +381,6 @@ margin-bottom: 10px;
   display: block;
 }
 
-.detail-button {
-  width: 100%;
-  text-align: center;
-}
 
 #poster span {
 margin-top: 10px;
@@ -403,9 +400,9 @@ font-size: 18px;
   letter-spacing: 0px;
   color: #E5E5E5;
   opacity: 1;
-  height: 500px;
+  height: 400px;
   width: 50%;
-  margin-top: 210px;
+  margin-top: 250px;
   display: inline-block;
   }
   
@@ -427,10 +424,12 @@ font-size: 18px;
     padding-bottom: 100px;
     color: red;
   }
-
   .detail-button {
+    display: inline-block;
     margin-top: 10px;
   }
+
+
   .staff-button input {
     border-radius: 30px;
     width: 35px;
@@ -498,3 +497,20 @@ font-size: 18px;
     border-radius: 5px;
     display: inline-block;
   }
+
+
+  .main-container{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    width: 100%;
+    }
+
+    .query-recommend_items {
+        text-align: center;
+        margin: 0 auto;
+        display: inline-block;
+        width: 19%;
+        margin-bottom: 20px;
+    }
+    

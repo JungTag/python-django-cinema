@@ -59,8 +59,7 @@ body {
     left: 910px;
     width: 100px;
     height: 42px;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    border: 3px solid #FFFFFF;
+    border: 1px solid #FFFFFF;
     border-radius: 21px;
     opacity: 1;
 }
@@ -71,15 +70,12 @@ body {
 
 .container input {
     background-color: transparent;
-    color: white;
 }
 
 .loginbutton button {
-    background-color: white;
     color: black;
 }
 .container input::placeholder {
-    color: white;
     margin-left: 5px;
     padding-left: 10px;
 }

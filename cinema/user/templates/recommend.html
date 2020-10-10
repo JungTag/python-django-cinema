@@ -47,7 +47,7 @@
         <div class="recommend_items">  
           <div class="recommend-wrap">        
             <div class="check">확정</div>
-            <a href="{% url 'detail' val.id %}"><img class="posterimage" src="{{val.poster_url}}"></a>
+            <a href="{% url 'detail' val.id %}"><img class="posterimage" src="{{val.poster_url}}" height="60px"></a>
           </div><br>
           <div class="movietitle">{{val.title}}</div>
           <div class="audience">{{val.released_date}}</div>
@@ -62,20 +62,20 @@
     <div id="title">
       <h3>{{query}}에 대한 검색 결과입니다.</h3>
     </div>
-    <div class="movies">
-      <div class="container">
+    <div class="query-movies">
         {% for result in results %}
-        <div class="recommend_items">
+        <div class="query-recommend_items">
+          <div class="recommend-wrap">        
+            <div class="check">확정</div>
           <a href="{% url 'detail' result.id %}"><img class="posterimage" src="{{result.poster_url}}" height="263px"></a><br>
+          </div>
           <div class="movietitle">{{result.title}}</div>
           <div class="audience">{{result.released_date}}</div>
           <div class="recobutton"><a href="{% url 'vote' result.id %}"><input onclick="confirm_vote()" class="button" type="button" value="투표하기"></a></div>
         </div>
         {% endfor %}
-      </div>
     </div>
     {% endif %}
-        
 </body>
 <script>
   function confirm_vote() {
@@ -83,6 +83,7 @@
   if(confirm_vote == true) {
     alert("투표되었습니다.");
   }
+  else()
 }
 </script>
 </html>
