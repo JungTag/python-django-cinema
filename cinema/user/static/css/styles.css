@@ -236,9 +236,9 @@ input:focus {
 
 /*mainpage*/
 #topten{
-  margin-top: 110px;
+  margin-top: 30px;
   text-align: center;
-  margin-bottom: 98px;
+  margin-bottom: 30px;
   line-height: 40px;
   vertical-align: middle;
   }
@@ -251,7 +251,7 @@ input:focus {
   
   #topten p {
   display: inline-block;
-  font-size: 25px;
+  font-size: 50px;
   }
   
   #gorecommand {
@@ -265,6 +265,7 @@ input:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  font-size: 25px;
   }
   
   
@@ -276,7 +277,7 @@ input:focus {
   }
   
   #mainsearchbar a {
-    font-size: 17px;
+    font-size: 60px;
     border: 3px;
   }
   
