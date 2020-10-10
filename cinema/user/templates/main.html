@@ -64,89 +64,117 @@
       <div class="p1">
         <div class="wrapper">
           <div class="count">1위</div>
+          {% if first.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' first.id %}?next={{request.path}}"><img class="posterimage"
               src="{{first.poster_url}}"></a>
         </div><br>
         <div class="movietitle">{{first.title}}</div>
-        <div class="audience">{{first.released_date}}</div>
+        <div class="audience">{{first.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' first.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
       <div class="p2">
         <div class="wrapper">
           <div class="count">2위</div>
+          {% if second.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' second.id %}?next={{request.path}}"><img class="posterimage"
               src="{{second.poster_url}}"></a>
         </div><br>
         <div class="movietitle">{{second.title}}</div>
-        <div class="audience">{{second.released_date}}</div>
+        <div class="audience">{{second.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' second.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
       <div class="p3">
         <div class="wrapper">
           <div class="count">3위</div>
+          {% if third.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' third.id %}?next={{request.path}}"><img class="posterimage"
               src="{{third.poster_url}}"></a>
         </div><br>
         <div class="movietitle">{{third.title}}</div>
-        <div class="audience">{{third.released_date}}</div>
+        <div class="audience">{{third.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' third.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
       <div class="p4">
         <div class="wrapper">
           <div class="count">4위</div>
-          {% if fourth.is_rereleased %}          
+          {% if fourth.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' fourth.id %}?next={{request.path}}"><img class="posterimage"
               src="{{fourth.poster_url}}"></a><br>
 
         </div>
         <div class="movietitle">{{fourth.title}}</div>
-        <div class="audience">{{fourth.released_date}}</div>
+        <div class="audience">{{fourth.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' fourth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
       <div class="p5">
         <div class="wrapper">
           <div class="count">5위</div>
-          {% if fifth.is_rereleased %}          
+          {% if fifth.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' fifth.id %}?next={{request.path}}"><img class="posterimage"
               src="{{fifth.poster_url}}"></a><br>
 
         </div>
         <div class="movietitle">{{fifth.title}}</div>
-        <div class="audience">{{fifth.released_date}}</div>
+        <div class="audience">{{fifth.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' fifth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
@@ -155,113 +183,139 @@
       <div class="p6">
         <div class="wrapper">
           <div class="count">6위</div>
-          {% if sixth.is_rereleased %}          
+          {% if sixth.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' sixth.id %}?next={{request.path}}"><img class="posterimage"
               src="{{sixth.poster_url}}"></a><br>
 
         </div>
         <div class="movietitle">{{sixth.title}}</div>
-        <div class="audience">{{sixth.released_date}}</div>
+        <div class="audience">{{sixth.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' sixth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
       <div class="p7">
         <div class="wrapper">
           <div class="count">7위</div>
-          {% if seventh.is_rereleased %}          
+          {% if seventh.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' seventh.id %}?next={{request.path}}"><img class="posterimage"
               src="{{seventh.poster_url}}"></a><br>
 
         </div>
         <div class="movietitle">{{seventh.title}}</div>
-        <div class="audience">{{seventh.released_date}}</div>
+        <div class="audience">{{seventh.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' seventh.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
       <div class="p8">
         <div class="wrapper">
           <div class="count">8위</div>
-          {% if eighth.is_rereleased %}          
+          {% if eighth.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' eighth.id %}?next={{request.path}}"><img class="posterimage"
               src="{{eighth.poster_url}}"></a><br>
         </div>
         <div class="movietitle">{{eighth.title}}</div>
-        <div class="audience">{{eighth.released_date}}</div>
+        <div class="audience">{{eighth.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' eighth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
       <div class="p9">
         <div class="wrapper">
           <div class="count">9위</div>
-          {% if ninth.is_rereleased %}          
+          {% if ninth.is_rereleased %}
           <div class="check">확정</div>
+          {% endif %}
           <a href="{% url 'detail' ninth.id %}?next={{request.path}}"><img class="posterimage"
               src="{{ninth.poster_url}}"></a><br>
 
         </div>
         <div class="movietitle">{{ninth.title}}</div>
-        <div class="audience">{{ninth.released_date}}</div>
+        <div class="audience">{{ninth.total_num}}표</div>
         <div class="recobutton">
           <form action="{% url 'vote' ninth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
           </form>
         </div>
       </div>
-        <div class="p10">
-          <div class="wrapper">
-            <div class="count">10위</div>
-            <div class="check">확정</div>
-            <a href="{% url 'detail' tenth.id %}?next={{request.path}}"><img class="posterimage"
-                src="{{tenth.poster_url}}"></a><br>
+      <div class="p10">
+        <div class="wrapper">
+          <div class="count">10위</div>
+          {% if tenth.is_rereleased %}
+          <div class="check">확정</div>
+          {% endif %}
+          <a href="{% url 'detail' tenth.id %}?next={{request.path}}"><img class="posterimage"
+              src="{{tenth.poster_url}}"></a><br>
 
-          </div>
-          <div class="movietitle">{{tenth.title}}</div>
-          <div class="audience">{{tenth.released_date}}</div>
-          <div class="recobutton">
-            <form action="{% url 'vote' tenth.id %}" method="POST" onsubmit="confirmVote()">
-              {% csrf_token %}
-              <input type="hidden" name="next" value="{{ request.path }}">
-              <button type="submit">투표하기</button>
-            </form>
-          </div>
+        </div>
+        <div class="movietitle">{{tenth.title}}</div>
+        <div class="audience">{{tenth.total_num}}표</div>
+        <div class="recobutton">
+          <form action="{% url 'vote' tenth.id %}" method="POST" onsubmit="confirmVote()">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
+            <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
+          </form>
         </div>
       </div>
     </div>
-    <div id="gorecommand">
-      <p>TOP 10 외에 재개봉을 원하는 영화가 있다면?</p>
-      <p>영화를 찾아 추천해주세요!</p>
-    </div>
-    <div id="mainsearchbar">
-      <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>
-    </div>
+  </div>
+  <div id="gorecommand">
+    <p>TOP 10 외에 재개봉을 원하는 영화가 있다면?</p>
+    <p>영화를 찾아 추천해주세요!</p>
+  </div>
+  <div id="mainsearchbar">
+    <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>
+  </div>
 </body>
 <script>
-    function confirmVote() {
-      var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
-      if (!isValid) { 
-        event.preventDefault();
-      }
+  function confirmVote() {
+    var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
+    if (!isValid) {
+      event.preventDefault();
     }
+  }
 </script>
 
 </html>

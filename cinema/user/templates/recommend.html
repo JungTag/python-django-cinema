@@ -1,25 +1,26 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>롯데시네마-재개봉프로젝트</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
+
 <body>
   <div id="navbar">
     <ul id="left-nav">
-        <li><a href="{% url 'main' %}">홈</a></li>
     </ul>
     <div id="logo">
-        <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
+      <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
     </div>
     <ul id="right-nav">
       <li>추천마감까지 D-22</li>
       {% if user.is_staff %}
       <li><a href="{% url 'staff_main' %}">스태프 페이지 가기</a></li>
       {% endif %}
-      {% if user.is_annonymous %}
+      {% if not user.is_authenticated %}
       <li><a href="{% url 'login' %}">로그인</a></li>
       {% else %}
       <li><a href="{% url 'logout' %}">로그아웃</a></li>
@@ -27,70 +28,83 @@
     </ul>
   </div>
 
-    <div id="searchbar">
-      <form method='GET' action="{% url 'recommend' %}">
-        <input type="text" name='query' placeholder="영화명을 입력해 주세요">
-      </form>
-    </div>
-    {% if is_searched == False %}
-    
-    <div id="title">
-        <h3>추천 영화</h3>
-    </div>
-    <div class="movies">
-      {% for key, vals in results.items %}
-      <div class="container">
-        <h1 class="tagname">{{key}}</h1>
-          {% for val in vals %}
-        <div class="recommend_items">  
-          <div class="recommend-wrap">
-            {% if val.is_rereleased %}        
-            <div class="check">확정</div>
-            <a href="{% url 'detail' val.id %}?next={{request.path}}"><img class="posterimage" src="{{val.poster_url}}"></a>
-          </div><br>
-          <div class="movietitle">{{val.title}}</div>
-          <div class="audience">{{val.released_date}}</div>
-          <div class="recobutton">
-            <form action="{% url 'vote' val.id %}" method="POST" onsubmit="confirmVote()">
-              {% csrf_token %}
-              <input type="hidden" name="next" value="{{ request.path }}">
-              <button type="submit">투표하기</button>
-            </form>
-          </div>
+  <div id="searchbar">
+    <form method='GET' action="{% url 'recommend' %}">
+      <input type="text" name='query' placeholder="영화명을 입력해 주세요">
+    </form>
+  </div>
+  {% if is_searched == False %}
+
+  <div id="title">
+    <h3>추천 영화</h3>
+  </div>
+  <div class="movies">
+    {% for key, vals in results.items %}
+    <div class="container">
+      <h1 class="tagname">{{key}}</h1>
+      {% for val in vals %}
+      <div class="recommend_items">
+        <div class="recommend-wrap">
+          {% if val.is_rereleased %}
+          <div class="check">확정</div>
+          {% endif %}
+          <a href="{% url 'detail' val.id %}?next={{request.path}}"><img class="posterimage"
+              src="{{val.poster_url}}"></a>
+        </div><br>
+        <div class="movietitle">{{val.title}}</div>
+        <div class="audience">{{val.total_num}}표</div>
+        <div class="recobutton">
+          <form action="{% url 'vote' val.id %}" method="POST" onsubmit="confirmVote()">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.path }}">
+            {% if user.is_authenticated %}
+            <button type="submit">투표하기</button>
+            {% else %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% endif %}
+          </form>
         </div>
-        {% endfor %}
       </div>
-        {% endfor %}
+      {% endfor %}
     </div>
-    {% else %} <!-- 검색어 받았을 때 -->
-    
-    <div id="title">
-      <h3>"{{query}}"에 대한 검색 결과입니다.</h3>
+    {% endfor %}
+  </div>
+  {% else %}
+  <!-- 검색어 받았을 때 -->
+
+  <div id="title">
+    <h3>"{{query}}"에 대한 검색 결과입니다.</h3>
+  </div>
+  <div class="query-movies">
+    {% for result in results %}
+    <div class="recommend_items">
+      <a href="{% url 'detail' result.id %}?next={{request.path}}"><img class="posterimage" src="{{result.poster_url}}"
+          height="263px"></a><br>
+      <div class="movietitle">{{result.title}}</div>
+      <div class="audience">{{result.total_num}}표</div>
+      <div class="recobutton">
+        <form action="{% url 'vote' result.id %}" method="POST" onsubmit="confirmVote()">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.path }}">
+          {% if user.is_authenticated %}
+          <button type="submit">투표하기</button>
+          {% else %}
+          <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+          {% endif %}
+        </form>
+      </div>
     </div>
-    <div class="query-movies">
-        {% for result in results %}
-        <div class="recommend_items">
-          <a href="{% url 'detail' result.id %}?next={{request.path}}"><img class="posterimage" src="{{result.poster_url}}" height="263px"></a><br>
-          <div class="movietitle">{{result.title}}</div>
-          <div class="audience">{{result.released_date}}</div>
-          <div class="recobutton">
-            <form action="{% url 'vote' result.id %}" method="POST" onsubmit="confirmVote()">
-              {% csrf_token %}
-              <input type="hidden" name="next" value="{{ request.path }}">
-              <button type="submit">투표하기</button>
-            </form>
-          </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
 </body>
 <script>
-    function confirmVote() {
-      var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
-      if (!isValid) { 
-        event.preventDefault();
-      }
+  function confirmVote() {
+    var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
+    if (!isValid) {
+      event.preventDefault();
     }
+  }
 </script>
+
 </html>

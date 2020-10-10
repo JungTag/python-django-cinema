@@ -5,36 +5,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>롯데시네마-재개봉프로젝트</title>
+  <title>Document</title>
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <div id="navbar">
-        <ul id="left-nav">
-            <li><a href="{% url 'main' %}">홈</a></li>
-        </ul>
-        <div id="logo">
-            <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
-        </div>
-        <ul id="right-nav">
-            <li>추천마감까지 D-22</li>
-            {% if user.is_staff %}
-            <li><a href="{% url 'staff_main' %}">스태프 페이지 가기</a></li>
-            {% endif %}
-            {% if user.is_anonymous %}
-            <li><a href="{% url 'login' %}">로그인</a></li>
-            {% else %}
-            <li><a href="{% url 'logout' %}">로그아웃</a></li>
-            {% endif %}
-        </ul>
+  <div id="navbar">
+    <ul id="left-nav">
+    </ul>
+    <div id="logo">
+      <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
     </div>
     <ul id="right-nav">
-      <li>추천마감까지 D-22</li>
       {% if user.is_staff %}
       <li><a href="{% url 'staff_main' %}">스태프 페이지 가기</a></li>
       {% endif %}
-      {% if user.is_anonymous %}
+      {% if not user.is_authenticated %}
       <li><a href="{% url 'login' %}">로그인</a></li>
       {% else %}
       <li><a href="{% url 'logout' %}">로그아웃</a></li>
@@ -51,31 +37,27 @@
       <div class="movietitle">{{movie.title}}</div><br>
       <div id="audience">{{movie.released_date}}</div><br>
       <div class="recobutton">
+        <!-- 투표 -->
         <form action="{% url 'vote' movie.id %}" method="POST" onsubmit="confirmVote()">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ next }}">
           <input type="hidden" name="movie_id" value="{{ movie.id }}">
           <button type="submit">투표하기</button>
         </form>
-      </div>
-    </div>
-  </div>
-
-  {% if user.is_staff %}
+      </div><br>
+       {% if user.is_staff %}
   <div class="detail-button">
     <div class="staff-button">
       {% if movie.is_excepted %}
       <!--이미 제외되었다면-->
       <form action="{% url 'deletion' movie.id %}" method="POST" onsubmit="confirmDeleteCancel()">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        <button type="submit">제외취소</button>
+        <button class="delete-button" type="submit">제외취소</button>
       </form>
       {% else %}
       <form action="{% url 'deletion' movie.id %}" method="POST" onsubmit="confirmDelete()">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        <button type="submit">제외확정</button>
+        <button class="delete-button" type="submit">제외확정</button>
       </form>
       {% endif %}
 
@@ -83,21 +65,22 @@
       <!--이미 상영확정되었다면-->
       <form action="{% url 're_release' movie.id %}" method="POST" onsubmit="confirmReleaseCancel()">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        <button type="submit">상영취소</button>
+        <button class="release-button" type="submit">상영취소</button>
       </form>
       {% else %}
       <form action="{% url 're_release' movie.id %}" method="POST" onsubmit="confirmRelease()">
         {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        <button type="submit">상영확정  1</button>
+        <button class="release-button" type="submit">상영확정</button>
       </form>
-      {% endif %}
+      {% endif %}  
     </div>
   </div>
   {% endif %}
+    </div>
   </div>
-  </div>
+ 
+
+
 
   <div id="moviecontent">
     <div class="content-div">
