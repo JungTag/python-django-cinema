@@ -51,7 +51,12 @@
           </div><br>
           <div class="movietitle">{{val.title}}</div>
           <div class="audience">{{val.total_num}}표</div>
-          <div class="recobutton"><a href="{% url 'vote' val.id %}"><input class="button" type="button" value="투표하기"></a></div>
+          <div class="recobutton"><a href="{% url 'vote' val.id %}">
+            {% if user.is_authenticated %}
+            <input class="button" type="button" value="투표하기"></a></div>
+            {% else %}
+            <input class="button" type="button" value="투표하기" disabled></a></div>
+            {% endif %}
         </div>
         {% endfor %}
       </div>
@@ -74,7 +79,12 @@
           </div>
           <div class="movietitle">{{result.title}}</div>
           <div class="audience">{{result.total_num}}표</div>
-          <div class="recobutton"><a href="{% url 'vote' result.id %}"><input onclick="confirm_vote()" class="button" type="button" value="투표하기"></a></div>
+          <div class="recobutton"><a href="{% url 'vote' result.id %}">
+            {% if user.is_authenticated %}
+            <input onclick="confirm_vote()" class="button" type="button" value="투표하기"></a></div>
+            {% else %}
+            <input onclick="confirm_vote()" class="button" type="button" value="투표하기" disabled></a></div>
+            {% endif %}
         </div>
         {% endfor %}
       </div>

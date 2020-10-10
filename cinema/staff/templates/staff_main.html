@@ -1,13 +1,17 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
     <div>
         <a href="{% url 'total' %}">지역별 통계 바로가기</a>
+        <br>
+        <a href="{% url 'reset' %}">투표수 전체 초기화</a>
     </div>
     <div class="searchcontainer">
         <form action="{% url 'staff_main' %}" method="GET">
@@ -26,9 +30,10 @@
         </thead>
         {% if is_searched  %} <!--검색 했을 때-->
         <tbody>
+            <a href="{% url 'staff_main' %}">Top 20 보기</a>
             {% for result in results %}
             <tr>
-                <td>{{result.title}}</td>
+                <td><a href="{% url 'detail' result.id %}">{{result.title}}</a></td>
                 <td>{{result.released_date}}</td>
                 <td>{{result.total_num}}표</td>
                 {% if result.is_excepted %}
@@ -44,13 +49,12 @@
             </tr>
             {% endfor %}
         </tbody>
-        <a href="{% url 'staff_main' %}">Top 20 보기</a>
         
         {% else %} <!-- 검색 전 top 20-->
         <tbody>
             {% for result in results %}
             <tr>
-                <td>{{result.title}}</td>
+                <td><a href="{% url 'detail' result.id %}">{{result.title}}</a></td>
                 <td>{{result.released_date}}</td>
                 <td>{{result.total_num}}표</td>
                 {% if result.is_excepted %}
