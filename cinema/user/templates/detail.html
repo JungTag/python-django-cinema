@@ -3,92 +3,153 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <div id="navbar">
-        <ul id="left-nav">
-            <li><a href="{% url 'main' %}">홈</a></li>
-            <li><a href="#">추천하기</a></li>
-        </ul>
-        <div id="logo">
-            <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
-        </div>
-        <ul id="right-nav">
-            <li>추천마감까지 D-22</li>
-            {% if user.is_staff %}
-            <li><a href="{% url 'staff_main' %}">스태프 페이지 가기</a></li>
-            {% endif %}
-            {% if user.is_anonymous %}
-            <li><a href="{% url 'login' %}">로그인</a></li>
-            {% else %}
-            <li><a href="{% url 'logout' %}">로그아웃</a></li>
-            {% endif %}
-        </ul>
+  <div id="navbar">
+    <ul id="left-nav">
+      <li><a href="{% url 'main' %}">홈</a></li>
+      <li><a href="#">추천하기</a></li>
+    </ul>
+    <div id="logo">
+      <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
     </div>
+    <ul id="right-nav">
+      <li>추천마감까지 D-22</li>
+      {% if user.is_staff %}
+      <li><a href="{% url 'staff_main' %}">스태프 페이지 가기</a></li>
+      {% endif %}
+      {% if user.is_anonymous %}
+      <li><a href="{% url 'login' %}">로그인</a></li>
+      {% else %}
+      <li><a href="{% url 'logout' %}">로그아웃</a></li>
+      {% endif %}
+    </ul>
+  </div>
 
-    <div id="poster">
-        <div class="wrap">
-          <div class="detail-wrap">            
-            <div class="check">확정</div>
-            <img src="{{movie.poster_url}}" width="273px" height="393px">
-          </div><br>
-            <div class="movietitle">{{movie.title}}</div><br>
-            <div id="audience">{{movie.released_date}}</div><br>
-            <div class="recobutton">
-              <a href="{% url 'vote' movie.id %}"><input class="button" onclick="confirm_vote()"
-             type="button" value="투표하기"></a>
-            </div><br>
-            {% if user.is_staff %}
-            <div class="detail-button">
-                <div class="staff-button">
-                    <a href="{% url 're_release' movie.id %}"><input onclick="confirm_release()" class="release-button" type="button" value="상영"></a>
-                    <a href="{% url 'deletion' movie.id %}"><input onclick="confirm_delete()" class="delete-button" type="button" value="제거"></a>
-                </div>
-            </div>
-            {% endif %}
-        </div>
+  <div id="poster">
+    <div class="wrap">
+      <div class="detail-wrap">
+        <div class="check">확정</div>
+        <img src="{{movie.poster_url}}" width="273px" height="393px">
+      </div><br>
+      <div class="movietitle">{{movie.title}}</div><br>
+      <div id="audience">{{movie.released_date}}</div><br>
+      <div class="recobutton">
+        <form action="{% url 'vote' movie.id %}" method="POST" onsubmit="confirmVote()">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ next }}">
+          <input type="hidden" name="movie_id" value="{{ movie.id }}">
+          <button type="submit">투표하기</button>
+        </form>
+      </div>
     </div>
+  </div>
 
-    <div id="moviecontent">
-        <div class="content-div">
-            <div><span class="content">장르 </span><span class="genre">{{movie.genre.name}}</span></div><br>
-            <div><span class="content">감독 </span><span class="directory">{{movie.director}}</span></div><br>
-            <div><span class="content">개봉 </span><span class="date">{{movie.released_date}} 년</span></div><br>
-            <div><span class="content">상영시간 </span><span class="runningtime">{{movie.running_time}} 분</span></div><br>
-            <div><span class="content">연령등급 </span><span class="age">{{movie.grade}}</span></div><br>
-            <div><span class="content">배우 </span><span class="actor">{{movie.actor}}</span></div><br>
-            <div><span class="content-intro">소개 </span><br><br>
-                <span class="intro">{{movie.description}}</span></div><br>
-            </tr>
-        </div>
+  {% if user.is_staff %}
+  <div class="detail-button">
+    <div class="staff-button">
+      {% if movie.is_excepted %}
+      <!--이미 제외되었다면-->
+      <form action="{% url 'deletion' movie.id %}" method="POST" onsubmit="confirmDeleteCancel()">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">제외취소</button>
+      </form>
+      {% else %}
+      <form action="{% url 'deletion' movie.id %}" method="POST" onsubmit="confirmDelete()">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">제외확정</button>
+      </form>
+      {% endif %}
+
+      {% if movie.is_rereleased %}
+      <!--이미 상영확정되었다면-->
+      <form action="{% url 're_release' movie.id %}" method="POST" onsubmit="confirmReleaseCancel()">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">상영취소</button>
+      </form>
+      {% else %}
+      <form action="{% url 're_release' movie.id %}" method="POST" onsubmit="confirmRelease()">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <button type="submit">상영확정  1</button>
+      </form>
+      {% endif %}
     </div>
+  </div>
+  {% endif %}
+  </div>
+  </div>
+
+  <div id="moviecontent">
+    <div class="content-div">
+      <div><span class="content">장르 </span><span class="genre">{{movie.genre.name}}</span></div><br>
+      <div><span class="content">감독 </span><span class="directory">{{movie.director}}</span></div><br>
+      <div><span class="content">개봉 </span><span class="date">{{movie.released_date}} 년</span></div><br>
+      <div><span class="content">상영시간 </span><span class="runningtime">{{movie.running_time}} 분</span></div><br>
+      <div><span class="content">연령등급 </span><span class="age">{{movie.grade}}</span></div><br>
+      <div><span class="content">배우 </span><span class="actor">{{movie.actor}}</span></div><br>
+      <div><span class="content-intro">소개 </span><br><br>
+        <span class="intro">{{movie.description}}</span></div><br>
+      </tr>
+    </div>
+  </div>
 
 </body>
 <script>
-    function confirm_vote() {
-      var confirm_vote = confirm("투표하시겠습니까? *중복 투표는 불가합니다*");
-      if(confirm_vote == true) {
-        alert("투표되었습니다.");
-      }
+  function confirmVote() {
+    var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
+    if (!isValid) {
+      event.preventDefault();
     }
+  }
 
-    function confirm_release() {
-      var confirm_release = confirm("이 영화를 상영 확정하시겠습니까?");
-      if(confirm_release == true) {
-        alert("상영 확정되었습니다.");
-      }
+  function confirmRelease() {
+    var isValid = confirm('이 영화를 상영 확정하시겠습니까?');
+    if (!isValid) {
+      event.preventDefault();
     }
+    else {
+      alert("상영 확정되었습니다.");
+    }
+  }
 
-    function confirm_delete() {
-      var confirm_delete = confirm("이 영화를 제외하시겠습니까?");
-      if(confirm_delete == true) {
-        alert("제외되었습니다.");
-      }
+  function confirmReleaseCancel() {
+    var isValid = confirm('상영을 취소하시겠습니까?');
+    if (!isValid) {
+      event.preventDefault();
     }
-  </script>
+    else {
+      alert("상영 취소되었습니다.");
+    }
+  }
+
+  function confirmDelete() {
+    var isValid = confirm('이 영화를 제외하시겠습니까?');
+    if (!isValid) {
+      event.preventDefault();
+    }
+    else {
+      alert("제외되었습니다.");
+    }
+  }
+
+  function confirmDeleteCancel() {
+    var isValid = confirm('제외 취소하시겠습니까?');
+    if (!isValid) {
+      event.preventDefault();
+    }
+    else {
+      alert("제외 취소되었습니다.");
+    }
+  }
+</script>
+
 </html>
