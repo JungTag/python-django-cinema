@@ -33,13 +33,30 @@
 
     <div id="poster">
         <div class="wrap">
-            <img src="{{movie.poster_url}}" width="275px" height="393px"><br>
+          <div class="detail-wrap">            
+            <div class="check">확정</div>
+            <img src="{{movie.poster_url}}" width="273px" height="393px">
+          </div><br>
             <div class="movietitle">{{movie.title}}</div><br>
             <div id="audience">{{movie.released_date}}</div><br>
-            <div class="recobutton"><a href="{% url 'vote' movie.id %}"><input class="button" onclick="confirm_vote()"
-                        type="button" value="투표하기"></a></div>
+            <div class="recobutton">
+              <a href="{% url 'vote' movie.id %}"><input class="button" onclick="confirm_vote()"
+             type="button" value="투표하기"></a>
+            </div>
         </div>
     </div>
+
+    {% if user.is_staff %}
+    <div class="detail-button">
+        <div class="staff-button">
+            <a href="{% url 're_release' movie.id %}"><input onclick="confirm_release()" class="release-button" type="button" value="상영"></a>
+            <a href="{% url 'deletion' movie.id %}"><input onclick="confirm_delete()" class="delete-button" type="button" value="제거"></a>
+        </div>
+    </div>
+    {% endif %}
+        </div>
+    </div>
+
     <div id="moviecontent">
         <div class="content-div">
             <div><span class="content">장르 </span><span class="genre">{{movie.genre.name}}</span></div><br>
@@ -54,14 +71,6 @@
         </div>
     </div>
 
-    {% if user.is_staff %}
-    <div class="detail-button">
-        <div class="recobutton">
-            <a href="{% url 're_release' movie.id %}"><input onclick="confirm_release" type="button" value="상영확정"></a>
-            <a href="{% url 'deletion' movie.id %}"><input onclick="confirm_delete" type="button" value="제거"></a>
-        </div>
-    </div>
-    {% endif %}
 </body>
 <script>
     function confirm_vote() {
