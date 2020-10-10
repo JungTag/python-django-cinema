@@ -1,62 +1,61 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>롯데시네마-재개봉프로젝트</title>
+    <title>signup</title>
     <link rel="stylesheet" href="{% static 'css/join.css' %}">
 </head>
 <body background="{% static 'images/login.jpg' %}">
-    <div class="container">
-        <div id='jointitle'>
-            회원가입
+    <h3>
+        회원가입
+    </h3>
+
+    <form action="{% url 'signup' %}" method="POST">
+        {% csrf_token %}
+        <div class="logincontainer">
+            <input id="loginbox" class="loginbox" type="text" name='username' placeholder="아이디" style="color: #ffffff;">
         </div>
-        <form action="{% url 'signup' %}" method="POST">
-            {% csrf_token %}
-            <div id="id">
-                <input type="text" name='username' placeholder="  아이디">
-            </div>
-            <br>
-            <div id="email">
-                <input type="text" name='email_address' placeholder="  이메일">
-            </div>
-            <br>
-            <div id="password">
-                <input type="password" name='password1' placeholder="  비밀번호">
-            </div>
-            <br>
-            <div id="password2">
-                <input type="password" name='password2' placeholder="  비밀번호 재확인">
-            </div>
-            <br>
-            <div class="local"> 
-                <select type="text" name="location" placeholder="지역선택">
-                    <option selected value="1">서울</option>
-                    <option value="2">경기북부</option>
-                    <option value="3">경기남부</option>
-                    <option value="4">인천</option>
-                    <option value="5">강원</option>
-                    <option value="6">대전</option>
-                    <option value="7">충청</option>
-                    <option value="8">대구</option>
-                    <option value="9">부산</option>
-                    <option value="10">울산</option>
-                    <option value="11">경상</option>
-                    <option value="12">광주</option>
-                    <option value="13">전라</option>
-                    <option value="14">제주</option>
-                </select>
-            </div>
-            <div class="joinbutton">
-                <button class="button" type="submit" value="가입하기">
-            </div>
-        </form>
-    </div>
-
-    {% if error %}
-    {{error}}
-    {% endif %}
-
+        <div class="logincontainer">
+            <input id="loginbox" class="loginbox" type="text" name='email_address' placeholder="이메일" style="color: #ffffff;">
+        </div>
+        <div class="logincontainer">
+            <input id="loginbox" class="loginbox" type="password" name='password1' placeholder="비밀번호" style="color: #ffffff;">
+        </div>
+        <div class="logincontainer">
+            <input id="loginbox" class="loginbox" type="password" name='password2' placeholder="비밀번호 재확인" style="color: #ffffff;">
+        </div>
+        
+        
+        <div class="locationcontainer">
+            <select id="location" class="location" type="text" name="location" placeholder="지역선택">
+                <option selected value="1">서울</option>
+                <option value="2">경기북부</option>
+                <option value="3">경기남부</option>
+                <option value="4">인천</option>
+                <option value="5">강원</option>
+                <option value="6">대전</option>
+                <option value="7">충청</option>
+                <option value="8">대구</option>
+                <option value="9">부산</option>
+                <option value="10">울산</option>
+                <option value="11">경상</option>
+                <option value="12">광주</option>
+                <option value="13">전라</option>
+                <option value="14">제주</option>
+            </select>
+        </div>
+        <div class="submitbtn">
+            <input type="submit" value="가입하기"  class="button">
+        </div>
+    </form>
+</div>
+<div class="error">
+{% if error %}
+{{error}}
+{% endif %}
+</div>
 </body>
 </html>

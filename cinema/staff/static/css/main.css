@@ -1,9 +1,18 @@
+*{
+  text-decoration: none;
+}
 body {
     background-color: #ffffff;
-    
+    text-decoration: none;
     }
-  
+
+a:link { color:blue;}
+a:visited { color: blue;}
+a:hover { color: gray; text-decoration: underline;}
   /*search*/
+input {
+  outline: none;
+}
 
 .searchcontainer {
     padding-top: 129px;

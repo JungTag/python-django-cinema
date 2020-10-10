@@ -45,7 +45,7 @@
   float: left;
   padding: 0px;
   margin: 0px;
-  width: 5%;
+  width: 10%;
   line-height: 60px;
   background: #1D1D1F 0% 0% no-repeat padding-box;
 }
@@ -91,12 +91,19 @@ line-height: 50px;
 left: 0px;
 z-index: 98;
 }
-
+.bar a{
+  font-size: 20px;
+  background: #EC1A24 0% 0% no-repeat padding-box;
+}
 .bar .insta {
 vertical-align: middle;
 line-height: 50px;
 display: inline-block;
 background-color: red;
+}
+
+.bar img {
+  border-radius: 8px;
 }
 
 #logo {
@@ -106,7 +113,7 @@ background-color: red;
 /* navbar */
 #navbar {
   height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat padding-box;
   width: 100%;
   position: fixed;
   top: 0;
@@ -118,10 +125,13 @@ background-color: red;
 
 
 #navbar a {
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat;
+  text-decoration: none;
+  border: none;
 }
 
 #navbar #logo {
+  z-index: 1000;
   height: 60px;
 }
 
@@ -135,7 +145,7 @@ background-color: red;
   margin: 0px;
   right: 0px;
   line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat padding-box;
 }
 
 #navbar #left-nav {
@@ -145,7 +155,7 @@ background-color: red;
   margin: 0px;
   width: 20%;
   line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat padding-box;
 }
 
 
@@ -299,17 +309,12 @@ input:focus {
 }
 
 
-.main-recommend_items {
-  display: ;
-}
-
-
 /*mainpage*/
 #topten{
-  margin-top: 110px;
+  margin-top: 10px;
   text-align: center;
-  margin-bottom: 98px;
-  line-height: 40px;
+  margin-bottom: 10px;
+  line-height: 30px;
   vertical-align: middle;
   }
   
@@ -321,7 +326,7 @@ input:focus {
   
   #topten p {
   display: inline-block;
-  font-size: 25px;
+  font-size: 80px;
   }
   
   #gorecommand {
@@ -335,6 +340,7 @@ input:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  font-size: 30px;
   }
   
   
@@ -346,7 +352,7 @@ input:focus {
   }
   
   #mainsearchbar a {
-    font-size: 17px;
+    font-size: 60px;
     border: 3px;
   }
   

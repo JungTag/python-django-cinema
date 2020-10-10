@@ -265,10 +265,12 @@ def vote(request, movie_id): # 프론트에서 confirm 넣어줘야 함 -> yes�
     else: # 중복 투표 // alert있었으면 좋겠음
         return redirect(next)
 
-
 def detail(request, movie_id):
     selected_movie = Movie.objects.get(id=movie_id)
-    next = request.GET['next']
+    if 'next' in request.POST:
+        next = request.POST['next']
+    else:
+        next = None
     return render(request, 'detail.html', {'movie' : selected_movie, 'next' : next})
 
 def logout(request):

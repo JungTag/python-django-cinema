@@ -5,26 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>롯데시네마-재개봉프로젝트</title>
-    <link rel="stylesheet" href="{% static 'css/loginstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/join.css' %}">
 </head>
+
 <body background="{% static 'images/login.jpg' %}">
-    <div class="container">
-        <div id="logintitle">
-            로그인
+    <h3>
+        로그인
+    </h3>
+
+    <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        <div class="logincontainer">
+            <input id="loginbox" class="loginbox" type="text" name='username' placeholder="아이디" style="color: #ffffff;">
         </div>
-        <form action="{% url 'login' %}" method="POST">
-            {% csrf_token %}
-            <div id="id">
-                <input type="text" name="username" placeholder="아이디">
-            </div>
-            <div id="password">
-                <input type="password" name='password' placeholder="비밀번호">
-            </div>
-        
-            <div class="loginbutton">
-                <button class="button" type="submit" value="로그인">
-            </div>
-        </form>
+        <div class="logincontainer">
+            <input id="loginbox" class="loginbox" type="password" name='password' placeholder="비밀번호" style="color: #ffffff;">
+        </div>
+
+    <div class="submitbtn">
+        <input type="submit" value="로그인"  class="button">
+    </div>
+</form>
+    <div class="submitbtn">
+        <a href="{% url 'signup' %}">
+        <input type="submit" value="가입하기"  class="button"></a>
+    </div>    
+
+    <div class="error">
+        {% if error %}
+        {{error}}
+        {% endif %}
     </div>
 </body>
 </html>

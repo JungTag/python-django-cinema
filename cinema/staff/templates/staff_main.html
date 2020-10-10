@@ -9,6 +9,8 @@
 </head>
 <body>
     <div>
+        <a href="{% url 'staff_main' %}">관리 페이지 홈</a>
+        <br>
         <a href="{% url 'total' %}">지역별 통계 바로가기</a>
         <br>
         <a href="{% url 'reset' %}">투표수 전체 초기화</a>
@@ -30,7 +32,6 @@
         </thead>
         {% if is_searched  %} <!--검색 했을 때-->
         <tbody>
-            <a href="{% url 'staff_main' %}">Top 20 보기</a>
             {% for result in results %}
             <tr>
                 <td><a href="{% url 'detail' result.id %}">{{result.title}}</a></td>
