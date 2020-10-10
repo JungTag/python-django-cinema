@@ -10,13 +10,24 @@
 </head>
 
 <body>
-  <div id="navbar">
-    <ul id="left-nav">
-      <li><a href="{% url 'main' %}">홈</a></li>
-      <li><a href="#">추천하기</a></li>
-    </ul>
-    <div id="logo">
-      <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
+    <div id="navbar">
+        <ul id="left-nav">
+            <li><a href="{% url 'main' %}">홈</a></li>
+        </ul>
+        <div id="logo">
+            <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
+        </div>
+        <ul id="right-nav">
+            <li>추천마감까지 D-22</li>
+            {% if user.is_staff %}
+            <li><a href="{% url 'staff_main' %}">스태프 페이지 가기</a></li>
+            {% endif %}
+            {% if user.is_anonymous %}
+            <li><a href="{% url 'login' %}">로그인</a></li>
+            {% else %}
+            <li><a href="{% url 'logout' %}">로그아웃</a></li>
+            {% endif %}
+        </ul>
     </div>
     <ul id="right-nav">
       <li>추천마감까지 D-22</li>

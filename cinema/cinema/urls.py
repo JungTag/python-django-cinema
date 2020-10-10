@@ -47,5 +47,6 @@ urlpatterns = [
     path('14/', staff.views.jeju, name='jeju'),
     path('staff_main/', staff.views.staff_main, name='staff_main'),
     path('re_release/<int:movie_id>', user.views.re_release, name='re_release'),
-    path('deletion/<int:movie_id>', user.views.deletion, name="deletion")
+    path('deletion/<int:movie_id>', user.views.deletion, name="deletion"),
+    path('reset/', staff.views.reset, name='reset')
 ]

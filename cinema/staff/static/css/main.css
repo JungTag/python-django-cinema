@@ -1,0 +1,74 @@
+body {
+    background-color: #ffffff;
+    
+    }
+  
+  /*search*/
+
+.searchcontainer {
+    padding-top: 129px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.searchbar {
+    border: 3px solid #141414;
+    border-radius: 21px;
+    opacity: 1;
+    width: 624px;
+    height: 54px;
+    text-align: left;
+    padding-left: 10px;
+    font: normal normal normal 15px/18px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    color: #141414;
+
+    
+  }
+  
+.searchbar::placeholder {
+    text-align: left;
+    padding-left: 10px;
+    font: normal normal normal 15px/18px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    color: #141414;
+    opacity: 1;
+    
+  }
+
+  
+
+  /*table*/
+table {
+    margin-left: 100px;
+    margin-top: 50px;
+    border-collapse: collapse;
+    text-align: left;
+    width: 80%;
+}
+table tr {
+    border-bottom: 3px solid #141414;
+    opacity: 1;
+    
+}
+.line {
+    background-color: #47FF9C; 
+}
+
+table th, table td {
+    padding: 10px 20px;
+}
+table td span {
+    background: #ffffff;
+    color: dimgrey;
+    display: none;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px;
+    position: absolute;
+    text-transform: uppercase;
+    top: 0;
+    left: 0;
+}

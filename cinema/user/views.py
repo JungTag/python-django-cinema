@@ -155,7 +155,7 @@ def signup(request):
                     'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
                     'token' : account_activation_token.make_token(user),
                 })
-                mail_title = "siteforsites@gmail.com"
+                mail_title = "Confirm your Signup!"
                 mail_to = request.POST['email_address']
                 email = EmailMessage(mail_title, message, to=[mail_to])
                 email.send()

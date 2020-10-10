@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from user.models import UserExtension, Movie, Genre
 import json
+from django.db.models import Max
+
 # Create your views here.
 def total(request):
     movie_list = []
@@ -170,4 +172,32 @@ def staff_main(request):
 
     return render(request, 'staff_main.html', {'results' : results, 'is_searched' : is_searched})
 
+def reset(request):
+    max_id = Movie.objects.all().aggregate(max_id=Max('id'))['max_id']
+    for i in range(1, max_id+1):
+        movie = Movie.objects.get(id=i)
+        movie.is_excepted = False
+        movie.is_rereleased = False
+        movie.save()
+        if movie.total_num == 0:
+            continue
+        
+        movie.total_num = 0
+        movie.Seoul = 0
+        movie.North_GyeonGi = 0
+        movie.South_GyeonGi = 0
+        movie.Incheon = 0
+        movie.Gangwon = 0
+        movie.Daejeon = 0
+        movie.ChungCheong = 0
+        movie.Daegu = 0
+        movie.Busan = 0
+        movie.Ulsan = 0
+        movie.GyeongSang = 0
+        movie.Gwangju = 0
+        movie.JeonRa = 0
+        movie.Jeju = 0
+        movie.voted_users.clear() 
+        movie.save()
 
+    return redirect('staff_main')
