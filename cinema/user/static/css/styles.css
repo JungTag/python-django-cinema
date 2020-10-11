@@ -27,29 +27,16 @@
   height: 60px;
 }
 
-
-#navbar #right-nav {
-  display: inline-block;
-  width: 300px;
-  position: absolute;
-  float: right;
-  padding: 0px;
-  margin: 0px;
-  right: 0px;
-  line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
-}
-
 #navbar #left-nav {
   position: absolute;
   float: left;
   padding: 0px;
   margin: 0px;
-  width: 10%;
+  width: 300px;
   line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat padding-box;
+  z-index: -1;
 }
-
 
 #left-nav li {
   list-style: none;
@@ -106,6 +93,9 @@ background-color: red;
   border-radius: 8px;
 }
 
+@media screen and (max-width: 480px){
+  .bar{display: none;}
+}
 #logo {
   display: inline-block;
 }
@@ -145,16 +135,7 @@ background-color: red;
   margin: 0px;
   right: 0px;
   line-height: 60px;
-  background: #333333 0% 0% no-repeat padding-box;
-}
-
-#navbar #left-nav {
-  position: absolute;
-  float: left;
-  padding: 0px;
-  margin: 0px;
-  width: 20%;
-  line-height: 60px;
+  z-index: -1;
   background: #333333 0% 0% no-repeat padding-box;
 }
 
@@ -293,6 +274,7 @@ border-radius: 29px;
 opacity: 1;
 width: 90px;
 font-size: 13px;
+outline: none;
 }
 
 input:focus {
@@ -317,16 +299,11 @@ input:focus {
   line-height: 30px;
   vertical-align: middle;
   }
-  
-  #topten img {
-  display: inline-block;
-  line-height: 40px;
-  vertical-align: middle;
-  }
-  
+
   #topten p {
   display: inline-block;
-  font-size: 80px;
+  font-size: 90px;
+  margin: 40px 0px 40px;
   }
   
   #gorecommand {
@@ -357,9 +334,12 @@ input:focus {
   }
   
   #topten .lotteicon{
-    vertical-align: middle;
+    vertical-align: text-bottom;
     margin-right: 20px;
-    margin-top: -10px;
+  }
+
+  @media screen and (max-width: 480px){
+    #topten .lotteicon{display: none;}
   }
   
   .instagram {

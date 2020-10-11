@@ -13,7 +13,10 @@
         <br>
         <a href="{% url 'total' %}">지역별 통계 바로가기</a>
         <br>
-        <a href="{% url 'reset' %}">투표수 전체 초기화</a>
+        <form action="{% url 'reset' %}" method="POST" onsubmit="confirmReset()">
+        {% csrf_token %}
+        <button class="button" type="submit">투표수 전체 초기화</button>
+        </form>
     </div>
     <div class="searchcontainer">
         <form action="{% url 'staff_main' %}" method="GET">
@@ -74,4 +77,12 @@
         {% endif %}
     </table>
 </body>
+<script>
+  function confirmReset() {
+    var isValid = confirm('투표롤 초기화하시겠습니까? **복구할 수 없습니다**');
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+</script>
 </html>

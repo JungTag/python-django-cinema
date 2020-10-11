@@ -16,16 +16,16 @@
     <form action="{% url 'signup' %}" method="POST">
         {% csrf_token %}
         <div class="logincontainer">
-            <input id="loginbox" class="loginbox" type="text" name='username' placeholder="아이디" style="color: #ffffff;">
+            <input id="loginbox" class="loginbox" type="text" name='username' placeholder="아이디" autocomplete="new-password" style="color: #ffffff;">
         </div>
         <div class="logincontainer">
-            <input id="loginbox" class="loginbox" type="text" name='email_address' placeholder="이메일" style="color: #ffffff;">
+            <input id="loginbox" class="loginbox" type="text" name='email_address' placeholder="이메일" autocomplete="new-password" style="color: #ffffff;">
         </div>
         <div class="logincontainer">
-            <input id="loginbox" class="loginbox" type="password" name='password1' placeholder="비밀번호" style="color: #ffffff;">
+            <input id="loginbox" class="loginbox" type="password" name='password1' placeholder="비밀번호" autocomplete="new-password" style="color: #ffffff;">
         </div>
         <div class="logincontainer">
-            <input id="loginbox" class="loginbox" type="password" name='password2' placeholder="비밀번호 재확인" style="color: #ffffff;">
+            <input id="loginbox" class="loginbox" type="password" name='password2' placeholder="비밀번호 재확인" autocomplete="new-password" style="color: #ffffff;">
         </div>
         
         
