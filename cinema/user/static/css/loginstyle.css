@@ -1,6 +1,7 @@
 body {
     background-repeat: no-repeat;
     background-size: cover;
+    color: black;
 }
 
 #logintitle {
@@ -12,12 +13,7 @@ body {
     margin-bottom: 35px;
 }
 
-#logintitle button {
-    top: 315px;
-    left: 923px;
-    width: 75px;
-    height: 33px;
-}
+
 #id {
     text-align: center;
     margin-bottom: 20px;
@@ -30,12 +26,13 @@ body {
     height: 42px;
     border: 2px solid #FFFFFF;
     border-radius: 21px;
-
+    color: #ffffff;
+    padding-left: 30px;
 }
 
 #password {
     text-align: center;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
 
 }
 
@@ -47,21 +44,19 @@ body {
     border: 2px solid #FFFFFF;
     border-radius: 21px;
     opacity: 1;
-
+    color: #ffffff;
+    padding-left: 30px;
 }
 
 .loginbutton {
     text-align: center;
+    display: inline-block;
+    color: #ffffff;
 }
 
-.loginbutton button{
-    top: 793px;
-    left: 910px;
-    width: 100px;
-    height: 42px;
-    border: 1px solid #FFFFFF;
-    border-radius: 21px;
-    opacity: 1;
+.signupbutton {
+    text-align: center;
+    display: inline-block;
 }
 
 .container {
@@ -73,13 +68,37 @@ body {
 }
 
 .loginbutton button {
-    color: black;
-}
-.container input::placeholder {
-    margin-left: 5px;
-    padding-left: 10px;
+        border: 2px solid #ffffff;
+        border-radius: 29px;
+        background-color: #141414;
+        width: 100px;
+        height: 40px;
+        font-size: 15px;
+        outline: none;
+        display: inline-block;
+        margin-right: 10px;
+        color: #ffffff;
 }
 
+.signupbutton button {
+    border: 2px solid #ffffff;
+    border-radius: 29px;
+    background-color:#141414;
+    width: 100px;
+    height: 40px;
+    font-size: 15px;
+    outline: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.loginbutton::value {
+    color: #ffffff;
+}
+
+.container input::placeholder {
+    margin-left: 5px;
+}
 
 .form div input {
     padding-left: 60px;
@@ -88,3 +107,33 @@ body {
 input:focus {
     outline: none;
 }
+
+.buttons {
+    width: 100%;
+    text-align: center;
+}
+
+.error {
+    text-align: center;
+    color: #ffffff;
+    font-size: 19px;
+    margin-top: 20px;
+}
+
+select:focus {
+    outline: none;
+  }
+
+option:focus {
+    outline: none;
+}
+
+/* input box color */ 
+
+input:-webkit-autofill {
+     -webkit-box-shadow:#f6f6f6 inset ; -webkit-text-fill-color:#000; }
+input:-webkit-autofill, 
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;}

@@ -59,11 +59,19 @@
       <!--이미 제외되었다면-->
       <form action="{% url 'deletion' movie.id %}" method="POST" onsubmit="confirmDeleteCancel()">
         {% csrf_token %}
+<<<<<<< Updated upstream
+=======
+        <input type="hidden" name="next" value="{{ next }}">
+>>>>>>> Stashed changes
         <button class="delete-button" type="submit">제외취소</button>
       </form>
       {% else %}
       <form action="{% url 'deletion' movie.id %}" method="POST" onsubmit="confirmDelete()">
         {% csrf_token %}
+<<<<<<< Updated upstream
+=======
+        <input type="hidden" name="next" value="{{ next }}">
+>>>>>>> Stashed changes
         <button class="delete-button" type="submit">제외확정</button>
       </form>
       {% endif %}
@@ -72,11 +80,19 @@
       <!--이미 상영확정되었다면-->
       <form action="{% url 're_release' movie.id %}" method="POST" onsubmit="confirmReleaseCancel()">
         {% csrf_token %}
+<<<<<<< Updated upstream
+=======
+        <input type="hidden" name="next" value="{{ next }}">
+>>>>>>> Stashed changes
         <button class="release-button" type="submit">상영취소</button>
       </form>
       {% else %}
       <form action="{% url 're_release' movie.id %}" method="POST" onsubmit="confirmRelease()">
         {% csrf_token %}
+<<<<<<< Updated upstream
+=======
+        <input type="hidden" name="next" value="{{ next }}">
+>>>>>>> Stashed changes
         <button class="release-button" type="submit">상영확정</button>
       </form>
       {% endif %}  

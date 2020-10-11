@@ -103,7 +103,11 @@ background-color: red;
 /* navbar */
 #navbar {
   height: 60px;
+<<<<<<< Updated upstream
   background: #333333 0% 0% no-repeat padding-box;
+=======
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+>>>>>>> Stashed changes
   width: 100%;
   position: fixed;
   top: 0;
@@ -115,6 +119,7 @@ background-color: red;
 
 
 #navbar a {
+<<<<<<< Updated upstream
   background: #333333 0% 0% no-repeat;
   text-decoration: none;
   border: none;
@@ -137,6 +142,63 @@ background-color: red;
   line-height: 60px;
   z-index: -1;
   background: #333333 0% 0% no-repeat padding-box;
+}
+
+
+#left-nav li {
+  list-style: none;
+  display: inline-block;
+  font-weight: bold;
+  font-family: Helvetica;
+  vertical-align: middle;
+  color: #FFFFFF;
+  margin-left: 40px;
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
+
+#right-nav li {
+  list-style: none;
+  display: inline-block;
+  font-weight: bold;
+  font-family: Helvetica;
+  vertical-align: middle;
+  color: #FFFFFF;
+  margin-right: 20px;
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
+=======
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
+
+#navbar #logo {
+  height: 60px;
+}
+>>>>>>> Stashed changes
+
+right-nav ul {
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
+
+#navbar #right-nav {
+  display: inline-block;
+  width: 300px;
+  position: absolute;
+  float: right;
+  padding: 0px;
+  margin: 0px;
+  right: 0px;
+  line-height: 60px;
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
+
+#navbar #left-nav {
+  position: absolute;
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  width: 20%;
+  line-height: 60px;
+  background: #1D1D1F 0% 0% no-repeat padding-box;
 }
 
 
@@ -485,6 +547,10 @@ font-size: 18px;
     margin-top: 10px;
   }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 .staff-button button {
     border-radius: 30px;
     width: 40px;
