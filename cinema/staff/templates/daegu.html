@@ -11,6 +11,12 @@
       max-width: 1000px;
       margin: 35px auto;
     }
+    * {
+      text-decoration: none;
+    }
+    a:link { color:blue;}
+    a:visited { color: blue;}
+    a:hover { color: gray; text-decoration: underline;}
     </style>
     
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -18,8 +24,26 @@
   </head>
 
   <body>
-        <div>통계/분석</div>
-        <a href="{% url 'main' %}">메인</a>
+    <div id="link">
+      <a href="{% url 'total'%}">전체</a>
+      <a href="{% url 'seoul'%}">서울</a>
+      <a href="{% url 'north_gyeongi'%}">경기북부</a>
+      <a href="{% url 'south_gyeongi'%}">경기남부</a>
+      <a href="{% url 'incheon'%}">인천</a>
+      <a href="{% url 'gangwon'%}">강원</a>
+      <a href="{% url 'daejeon'%}">대전</a>
+      <a href="{% url 'chungcheong'%}">충청</a>
+      <a href="{% url 'daegu'%}">대구</a>
+      <a href="{% url 'busan'%}">부산</a>
+      <a href="{% url 'ulsan'%}">울산</a>
+      <a href="{% url 'gyeongsang'%}">경상</a>
+      <a href="{% url 'gwangju'%}">광주</a>
+      <a href="{% url 'jeonra'%}">전라</a>
+      <a href="{% url 'jeju'%}">제주</a>
+    </div>
+        <a href="{% url 'main' %}">사이트 홈</a>
+        <br>
+        <a href="{% url 'staff_main' %}">관리 페이지 홈</a>
         <br>
      <div id="chart"></div>
     

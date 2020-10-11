@@ -27,29 +27,16 @@
   height: 60px;
 }
 
-
-#navbar #right-nav {
-  display: inline-block;
-  width: 300px;
-  position: absolute;
-  float: right;
-  padding: 0px;
-  margin: 0px;
-  right: 0px;
-  line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
-}
-
 #navbar #left-nav {
   position: absolute;
   float: left;
   padding: 0px;
   margin: 0px;
-  width: 20%;
+  width: 300px;
   line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat padding-box;
+  z-index: -1;
 }
-
 
 #left-nav li {
   list-style: none;
@@ -58,7 +45,7 @@
   font-family: Helvetica;
   vertical-align: middle;
   color: #FFFFFF;
-  margin-left: 40px;
+  margin-left: 10px;
   background: #1D1D1F 0% 0% no-repeat padding-box;
 }
 
@@ -91,7 +78,10 @@ line-height: 50px;
 left: 0px;
 z-index: 98;
 }
-
+.bar a{
+  font-size: 20px;
+  background: #EC1A24 0% 0% no-repeat padding-box;
+}
 .bar .insta {
 vertical-align: middle;
 line-height: 50px;
@@ -99,11 +89,82 @@ display: inline-block;
 background-color: red;
 }
 
+.bar img {
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 480px){
+  .bar{display: none;}
+}
 #logo {
   display: inline-block;
 }
 
+/* navbar */
+#navbar {
+  height: 60px;
+  background: #333333 0% 0% no-repeat padding-box;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  text-align: center;
+}
 
+
+#navbar a {
+  background: #333333 0% 0% no-repeat;
+  text-decoration: none;
+  border: none;
+}
+
+#navbar #logo {
+  z-index: 1000;
+  height: 60px;
+}
+
+
+#navbar #right-nav {
+  display: inline-block;
+  width: 300px;
+  position: absolute;
+  float: right;
+  padding: 0px;
+  margin: 0px;
+  right: 0px;
+  line-height: 60px;
+  z-index: -1;
+  background: #333333 0% 0% no-repeat padding-box;
+}
+
+
+#left-nav li {
+  list-style: none;
+  display: inline-block;
+  font-weight: bold;
+  font-family: Helvetica;
+  vertical-align: middle;
+  color: #FFFFFF;
+  margin-left: 40px;
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
+
+#right-nav li {
+  list-style: none;
+  display: inline-block;
+  font-weight: bold;
+  font-family: Helvetica;
+  vertical-align: middle;
+  color: #FFFFFF;
+  margin-right: 20px;
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
+
+right-nav ul {
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+}
 
 /* recommand page */
 
@@ -207,12 +268,13 @@ font-size: 17px;
 margin-top: 10px;
 }
 
-.recobutton input{
+button {
 border: 2px solid white;
 border-radius: 29px;
 opacity: 1;
 width: 90px;
 font-size: 13px;
+outline: none;
 }
 
 input:focus {
@@ -229,29 +291,19 @@ input:focus {
 }
 
 
-.main-recommend_items {
-  display: ;
-}
-
-
 /*mainpage*/
 #topten{
-  margin-top: 110px;
+  margin-top: 10px;
   text-align: center;
-  margin-bottom: 98px;
-  line-height: 40px;
+  margin-bottom: 10px;
+  line-height: 30px;
   vertical-align: middle;
   }
-  
-  #topten img {
-  display: inline-block;
-  line-height: 40px;
-  vertical-align: middle;
-  }
-  
+
   #topten p {
   display: inline-block;
-  font-size: 25px;
+  font-size: 90px;
+  margin: 40px 0px 40px;
   }
   
   #gorecommand {
@@ -265,6 +317,7 @@ input:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  font-size: 30px;
   }
   
   
@@ -276,14 +329,17 @@ input:focus {
   }
   
   #mainsearchbar a {
-    font-size: 17px;
+    font-size: 60px;
     border: 3px;
   }
   
   #topten .lotteicon{
-    vertical-align: middle;
+    vertical-align: text-bottom;
     margin-right: 20px;
-    margin-top: -10px;
+  }
+
+  @media screen and (max-width: 480px){
+    #topten .lotteicon{display: none;}
   }
   
   .instagram {
@@ -429,19 +485,21 @@ font-size: 18px;
     margin-top: 10px;
   }
 
-
-  .staff-button input {
+.staff-button button {
     border-radius: 30px;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     margin-right: 5px;
+    display: inline-block;
   }
 
   .release-button {
     background-color: blue;
     border: blue;
   }
-
+  form {
+    display: inline;
+  }
   .delete-button {
     background-color: red;
     border: red;
@@ -513,4 +571,3 @@ font-size: 18px;
         width: 19%;
         margin-bottom: 20px;
     }
-    

@@ -1,11 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>롯데시네마-스태프</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
+    <div>
+        <a href="{% url 'staff_main' %}">관리 페이지 홈</a>
+        <br>
+        <a href="{% url 'total' %}">지역별 통계 바로가기</a>
+        <br>
+        <form action="{% url 'reset' %}" method="POST" onsubmit="confirmReset()">
+        {% csrf_token %}
+        <button class="button" type="submit">투표수 전체 초기화</button>
+        </form>
+    </div>
     <div class="searchcontainer">
         <form action="{% url 'staff_main' %}" method="GET">
             <input id="searchBar" class="searchbar" type="text"  name="query" placeholder="영화명을 입력해 주세요">
@@ -25,7 +37,7 @@
         <tbody>
             {% for result in results %}
             <tr>
-                <td>{{result.title}}</td>
+                <td><a href="{% url 'detail' result.id %}">{{result.title}}</a></td>
                 <td>{{result.released_date}}</td>
                 <td>{{result.total_num}}표</td>
                 {% if result.is_excepted %}
@@ -41,13 +53,12 @@
             </tr>
             {% endfor %}
         </tbody>
-        <a href="{% url 'staff_main' %}">Top 20 보기</a>
         
         {% else %} <!-- 검색 전 top 20-->
         <tbody>
             {% for result in results %}
             <tr>
-                <td>{{result.title}}</td>
+                <td><a href="{% url 'detail' result.id %}">{{result.title}}</a></td>
                 <td>{{result.released_date}}</td>
                 <td>{{result.total_num}}표</td>
                 {% if result.is_excepted %}
@@ -66,4 +77,12 @@
         {% endif %}
     </table>
 </body>
+<script>
+  function confirmReset() {
+    var isValid = confirm('투표롤 초기화하시겠습니까? **복구할 수 없습니다**');
+    if (!isValid) {
+      event.preventDefault();
+    }
+  }
+</script>
 </html>
