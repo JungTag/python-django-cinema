@@ -8,9 +8,15 @@
 
     <style>
     #chart {
-      max-width: 1500px;
+      max-width: 1000px;
       margin: 35px auto;
     }
+    * {
+      text-decoration: none;
+    }
+    a:link { color:blue;}
+    a:visited { color: blue;}
+    a:hover { color: gray; text-decoration: underline;}
     </style>
     
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -35,7 +41,9 @@
       <a href="{% url 'jeonra'%}">전라</a>
       <a href="{% url 'jeju'%}">제주</a>
     </div>
-        <a href="{% url 'main' %}">메인</a>
+        <a href="{% url 'main' %}">사이트 홈</a>
+        <br>
+        <a href="{% url 'staff_main' %}">관리 페이지 홈</a>
         <br>
      <div id="chart"></div>
     

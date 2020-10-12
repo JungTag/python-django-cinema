@@ -27,29 +27,16 @@
   height: 60px;
 }
 
-
-#navbar #right-nav {
-  display: inline-block;
-  width: 300px;
-  position: absolute;
-  float: right;
-  padding: 0px;
-  margin: 0px;
-  right: 0px;
-  line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
-}
-
 #navbar #left-nav {
   position: absolute;
   float: left;
   padding: 0px;
   margin: 0px;
-  width: 5%;
+  width: 300px;
   line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat padding-box;
+  z-index: -1;
 }
-
 
 #left-nav li {
   list-style: none;
@@ -91,7 +78,10 @@ line-height: 50px;
 left: 0px;
 z-index: 98;
 }
-
+.bar a{
+  font-size: 20px;
+  background: #EC1A24 0% 0% no-repeat padding-box;
+}
 .bar .insta {
 vertical-align: middle;
 line-height: 50px;
@@ -99,6 +89,13 @@ display: inline-block;
 background-color: red;
 }
 
+.bar img {
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 480px){
+  .bar{display: none;}
+}
 #logo {
   display: inline-block;
 }
@@ -106,7 +103,7 @@ background-color: red;
 /* navbar */
 #navbar {
   height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat padding-box;
   width: 100%;
   position: fixed;
   top: 0;
@@ -118,10 +115,13 @@ background-color: red;
 
 
 #navbar a {
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  background: #333333 0% 0% no-repeat;
+  text-decoration: none;
+  border: none;
 }
 
 #navbar #logo {
+  z-index: 1000;
   height: 60px;
 }
 
@@ -135,17 +135,8 @@ background-color: red;
   margin: 0px;
   right: 0px;
   line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
-}
-
-#navbar #left-nav {
-  position: absolute;
-  float: left;
-  padding: 0px;
-  margin: 0px;
-  width: 20%;
-  line-height: 60px;
-  background: #1D1D1F 0% 0% no-repeat padding-box;
+  z-index: -1;
+  background: #333333 0% 0% no-repeat padding-box;
 }
 
 
@@ -283,6 +274,7 @@ border-radius: 29px;
 opacity: 1;
 width: 90px;
 font-size: 13px;
+outline: none;
 }
 
 input:focus {
@@ -299,29 +291,19 @@ input:focus {
 }
 
 
-.main-recommend_items {
-  display: ;
-}
-
-
 /*mainpage*/
 #topten{
-  margin-top: 110px;
+  margin-top: 10px;
   text-align: center;
-  margin-bottom: 98px;
-  line-height: 40px;
+  margin-bottom: 10px;
+  line-height: 30px;
   vertical-align: middle;
   }
-  
-  #topten img {
-  display: inline-block;
-  line-height: 40px;
-  vertical-align: middle;
-  }
-  
+
   #topten p {
   display: inline-block;
-  font-size: 25px;
+  font-size: 90px;
+  margin: 40px 0px 40px;
   }
   
   #gorecommand {
@@ -335,6 +317,7 @@ input:focus {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  font-size: 30px;
   }
   
   
@@ -346,14 +329,17 @@ input:focus {
   }
   
   #mainsearchbar a {
-    font-size: 17px;
+    font-size: 60px;
     border: 3px;
   }
   
   #topten .lotteicon{
-    vertical-align: middle;
+    vertical-align: text-bottom;
     margin-right: 20px;
-    margin-top: -10px;
+  }
+
+  @media screen and (max-width: 480px){
+    #topten .lotteicon{display: none;}
   }
   
   .instagram {

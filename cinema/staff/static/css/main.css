@@ -1,10 +1,24 @@
+*{
+  text-decoration: none;
+}
 body {
     background-color: #ffffff;
-    
+    text-decoration: none;
     }
-  
-  /*search*/
 
+a:link { color:blue;}
+a:visited { color: blue;}
+a:hover { color: gray; text-decoration: underline;}
+  /*search*/
+input {
+  outline: none;
+}
+.button {
+  background-color: white;
+  color: black;
+  border: 2px solid #008CBA;
+  outline: none;
+}
 .searchcontainer {
     padding-top: 129px;
     display: flex;

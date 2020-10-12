@@ -7,36 +7,16 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<!-- <script>
-    var recobutton = true;
-    function OnlyOneClick() {
-        if (recobutton) {
-            recobutton = false;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-  function insert() {
-        var confirm_vote = confirm("투표하시겠습니까? *중복 투표는 불가합니다*");
-        var ooc = OnlyOneClick();
-        if ((ooc) && (confirm_vote == true)) {
-            alert("투표되었습니다.");
-        } else {
-            alert("중복투표입니다.");
-        }
-    }
-
-</script> -->
 
 
 <body>
   <div id="navbar">
     <ul id="left-nav">
+    <li><a href="#">프로젝트 소개</a></li>
+    <li><a href="https://github.com/JungTag/Cinema">GitHub</a></li>
     </ul>
     <div id="logo">
-      <img src="{% static 'images/lottelogo.jpeg' %}" height=60px;>
+      <a href="{% url 'main' %}"><img src="{% static 'images/lottelogo.jpg' %}" height=56px;></a>
     </div>
     <ul id="right-nav">
       {% if user.is_staff %}
@@ -51,12 +31,12 @@
     </ul>
   </div>
   <div class="bar">
-    재개봉 확인은 롯데시네마 인스타그램에서 <img class="instagram" src="{% static 'images/instagram.png' %}" height=25px;>
+    <a href="https://www.instagram.com/lottecinema_official/?hl=ko" target="_blank">재개봉 확인은 롯데시네마 인스타그램에서 <img class="instagram" src="{% static 'images/instagram.png' %}" height=30px;></a>
   </div>
 
   <div id="topten">
-    <img class="lotteicon" src="{% static 'images/lotteicon.png' %}" width="30px">
-    <p>8월 TOP 10</p>
+    <img class="lotteicon" src="{% static 'images/lotteicon.png' %}" width="70px">
+    <p>TOP 10</p>
   </div>
 
   <div class="main_movies">

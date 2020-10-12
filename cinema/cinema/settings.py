@@ -127,9 +127,13 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = Path(BASE_DIR, 'static')
 
-EMAIL_HOST = 'smtp.gmail.com' 		 # 메일 호스트 서버
-EMAIL_PORT = '587' 			 # 서버 포트
-EMAIL_HOST_USER = 'likelioncinema@gmail.com' 	 # 우리가 사용할 Gmail
-EMAIL_HOST_PASSWORD = '~woroqhd123'		 # 우리가 사용할 Gmail p
-EMAIL_USE_TLS = True			 # TLS 보안 설정
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER	 # 응답 메일 관련 설정
+# SECRET_FILE = BASE_DIR / 'secrets.json'
+# secrets = json.loads(open(SECRET_FILE).read())
+
+EMAIL_HOST = secrets["EMAIL"]["EMAIL_HOST"]  # 메일 호스트 서버
+EMAIL_PORT = secrets["EMAIL"]["EMAIL_PORT"]  # 서버 포트
+EMAIL_HOST_USER = secrets["EMAIL"]["EMAIL_HOST_USER"]  # 우리가 사용할 Gmail
+EMAIL_HOST_PASSWORD = secrets["EMAIL"]["EMAIL_HOST_PASSWORD"] # 우리가 사용할 Gmail p
+
+EMAIL_USE_TLS = True  # TLS 보안 설정
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # 응답 메일 관련 설정
