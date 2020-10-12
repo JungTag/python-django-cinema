@@ -45,7 +45,8 @@
           <button type="submit">투표하기</button>
         </form>
       </div><br>
-       {% if user.is_staff %}
+      
+      {% if user.is_staff %}
   <div class="detail-button">
     <div class="staff-button">
       {% if movie.is_excepted %}
@@ -55,6 +56,7 @@
         <button class="delete-button" type="submit">제외취소</button>
       </form>
       {% else %}
+      <!-- 제외 -->
       <form action="{% url 'deletion' movie.id %}" method="POST" onsubmit="confirmDelete()">
         {% csrf_token %}
         <button class="delete-button" type="submit">제외확정</button>
@@ -67,6 +69,7 @@
         {% csrf_token %}
         <button class="release-button" type="submit">상영취소</button>
       </form>
+      <!-- 상영확정 -->
       {% else %}
       <form action="{% url 're_release' movie.id %}" method="POST" onsubmit="confirmRelease()">
         {% csrf_token %}
