@@ -43,7 +43,7 @@
         <!-- 투표 -->
         <form action="{% url 'vote' movie.id %}" method="POST" onsubmit="confirmVote()">
           {% csrf_token %}
-          <input type="hidden" name="next" value="{{ next }}">
+          <input type="hidden" name="next" value="{{ request.path }}">
           <input type="hidden" name="movie_id" value="{{ movie.id }}">
             {% if user.is_authenticated %}
             <button type="submit">투표하기</button>
