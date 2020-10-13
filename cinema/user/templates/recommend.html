@@ -81,8 +81,13 @@
   <div class="query-movies">
     {% for result in results %}
     <div class="recommend_items">
-      <a href="{% url 'detail' result.id %}?next={{request.path}}"><img class="posterimage" src="{{result.poster_url}}"
-          height="263px"></a><br>
+      <div class="recommend-wrap">
+        {% if result.is_rereleased %}
+        <div class="check">확정</div>
+        {% endif %}
+        <a href="{% url 'detail' result.id %}?next={{request.path}}"><img class="posterimage" src="{{result.poster_url}}"
+          height="263px"></a>
+      </div><br>
       <div class="movietitle">{{result.title}}</div>
       <div class="audience">{{result.total_num}}표</div>
       <div class="recobutton">
