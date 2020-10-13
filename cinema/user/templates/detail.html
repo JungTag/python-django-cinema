@@ -40,7 +40,7 @@
         <img src="{{movie.poster_url}}" width="273px" height="393px">
       </div><br>
       <div class="movietitle">{{movie.title}}</div><br>
-      <div id="audience">{{movie.released_date}}</div><br>
+      <div id="audience">{{movie.total_num}}표</div><br>
       <div class="recobutton">
         <!-- 투표 -->
         <form action="{% url 'vote' movie.id %}" method="POST" onsubmit="confirmVote()">
@@ -96,13 +96,13 @@
 
   <div id="moviecontent">
     <div class="content-div">
-      <div><span class="content">장르 </span><span class="genre">{{movie.genre.name}}</span></div><br>
-      <div><span class="content">감독 </span><span class="directory">{{movie.director}}</span></div><br>
-      <div><span class="content">개봉 </span><span class="date">{{movie.released_date}} 년</span></div><br>
-      <div><span class="content">상영시간 </span><span class="runningtime">{{movie.running_time}} 분</span></div><br>
-      <div><span class="content">연령등급 </span><span class="age">{{movie.grade}}</span></div><br>
-      <div><span class="content">배우 </span><span class="actor">{{movie.actor}}</span></div><br>
-      <div><span class="content-intro">소개 </span><br><br>
+      <div><span class="content">장르:</span><span class="genre">{{movie.genre.name}}</span></div><br>
+      <div><span class="content">감독:</span><span class="directory">{{movie.director}}</span></div><br>
+      <div><span class="content">개봉:</span><span class="date">{{movie.released_date}} 년</span></div><br>
+      <div><span class="content">상영시간:</span><span class="runningtime">{{movie.running_time}} 분</span></div><br>
+      <div><span class="content">연령등급:</span><span class="age">{{movie.grade}}</span></div><br>
+      <div><span class="content">배우:</span><span class="actor">{{movie.actor}}</span></div><br>
+      <div><span class="content-intro">소개:</span><br><br>
         <span class="intro">{{movie.description}}</span></div><br>
       </tr>
     </div>
