@@ -120,8 +120,11 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
-            auth.login(request, user)
-            return redirect('main')
+            if user.is_active == False:
+                return render(request, 'login.html', {'error': '이메일 인증이 완료되지 않았습니다.'})
+            else:
+                auth.login(request, user)
+                return redirect('main')
         else:
             return render(request, 'login.html', {'error' : '아이디 혹은 비밀번호가 올바르지 않습니다.'})
     
@@ -132,7 +135,8 @@ def signup(request):
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.get(email = request.POST['email_address'])
-                return render(request, 'signup.html', {'error' : '이미 사용 중인 이메일입니다.'})
+                user = User.objects.get(username = request.POST['username'])
+                return render(request, 'signup.html', {'error' : '이미 사용 중인 아이디 혹은 이메일입니다.'})
             
             except User.DoesNotExist:
                 user = User.objects.create_user(
@@ -160,7 +164,7 @@ def signup(request):
                 email = EmailMessage(mail_title, message, to=[mail_to])
                 email.send()
 
-                return render(request, 'login.html')
+                return render(request, 'validation_notice.html')
         else:
             return render(request, 'signup.html', {'error' : '비밀번호가 일치하지 않습니다.'})
         
@@ -176,8 +180,7 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        auth.login(request, user)
-        return redirect('main')
+        return render(request, 'login.html', {'validation_success' : '이메일이 인증되었습니다. 다시 로그인하세요.'})
     else:
         return render(request, 'login.html', {'error' : '계정 활성화 오류'})
 
@@ -296,3 +299,6 @@ def deletion(request, movie_id):
     movie.save()
 
     return redirect('detail', movie_id = movie.id)
+
+def validation_notice(request):
+    return render(request, 'validation_notice.html')
