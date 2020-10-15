@@ -134,10 +134,10 @@ def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2']:
             try:
-                user = User.objects.get(email = request.POST['email_address'])
-                user = User.objects.get(username = request.POST['username'])
-                return render(request, 'signup.html', {'error' : '이미 사용 중인 아이디 혹은 이메일입니다.'})
-            
+                if User.objects.get(email = request.POST['email_address']) or User.objects.get(username = request.POST['username']):
+                    user = User.objects.get(email=request.POST['email_address'])
+                    return render(request, 'signup.html', {'error' : '이미 사용 중인 아이디 혹은 이메일입니다.'})
+
             except User.DoesNotExist:
                 user = User.objects.create_user(
                     username = request.POST['username'],
