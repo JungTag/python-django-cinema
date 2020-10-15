@@ -118,6 +118,8 @@ def login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        if request.user.is_authenticated:
+            return redirect('main')
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
                 auth.login(request, user)
