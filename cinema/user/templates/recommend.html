@@ -11,7 +11,7 @@
 <body>
 <div id="navbar">
     <ul id="left-nav">
-    <li><a href="#">프로젝트 소개</a></li>
+    <li><a href="https://docs.google.com/presentation/d/1Hv5hKFQxH5U_CdWVXhC6mIyLMqjJxO009KEJIDX2WLU/edit?usp=sharing">프로젝트 소개</a></li>
     <li><a href="https://github.com/JungTag/Cinema">GitHub</a></li>
     </ul>
     <div id="logo">
@@ -60,7 +60,7 @@
           <form action="{% url 'vote' val.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and not val.is_excepted %}
             <button type="submit">투표하기</button>
             {% else %}
             <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
@@ -94,7 +94,7 @@
         <form action="{% url 'vote' result.id %}" method="POST" onsubmit="confirmVote()">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.path }}">
-          {% if user.is_authenticated %}
+          {% if user.is_authenticated and not result.is_excepted %}
           <button type="submit">투표하기</button>
           {% else %}
           <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>

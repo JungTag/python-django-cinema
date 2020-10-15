@@ -120,13 +120,10 @@ def login(request):
         password = request.POST['password']
         user = auth.authenticate(request, username=username, password=password)
         if user is not None:
-            if user.is_active == False:
-                return render(request, 'login.html', {'error': '이메일 인증이 완료되지 않았습니다.'})
-            else:
                 auth.login(request, user)
                 return redirect('main')
         else:
-            return render(request, 'login.html', {'error' : '아이디 혹은 비밀번호가 올바르지 않습니다.'})
+            return render(request, 'login.html', {'error' : '회원정보가 올바르지 않거나 이메일 인증이 완료되지 않았습니다.'})
     
     return render(request, 'login.html')
 
@@ -163,8 +160,8 @@ def signup(request):
                 mail_to = request.POST['email_address']
                 email = EmailMessage(mail_title, message, to=[mail_to])
                 email.send()
-
-                return render(request, 'validation_notice.html')
+                address = request.POST['email_address']
+                return render(request, 'validation_notice.html', {'address' : address})
         else:
             return render(request, 'signup.html', {'error' : '비밀번호가 일치하지 않습니다.'})
         
