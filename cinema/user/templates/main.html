@@ -26,7 +26,7 @@
       <li><a href="{% url 'logout' %}">로그아웃</a></li>
       {% else %}
       <li><a href="{% url 'login' %}">로그인</a></li>
-      <li><a href="{% url 'signup' %}">회원가입</a></li>
+      <li><a href="{% url 'signup' %}"></a></li>
       {% endif %}
     </ul>
   </div>
@@ -111,7 +111,7 @@
         </div>
       </div>
       <div class="p4">
-        <div class="wrapper">
+        <div class="wrapper">          
           <div class="count">4위</div>
           {% if fourth.is_rereleased %}
           <div class="check">확정</div>
@@ -135,7 +135,7 @@
         </div>
       </div>
       <div class="p5">
-        <div class="wrapper">
+        <div class="wrapper">          
           <div class="count">5위</div>
           {% if fifth.is_rereleased %}
           <div class="check">확정</div>
@@ -161,7 +161,7 @@
     </div>
     <div class="c2">
       <div class="p6">
-        <div class="wrapper">
+        <div class="wrapper">          
           <div class="count">6위</div>
           {% if sixth.is_rereleased %}
           <div class="check">확정</div>
@@ -185,7 +185,7 @@
         </div>
       </div>
       <div class="p7">
-        <div class="wrapper">
+        <div class="wrapper">          
           <div class="count">7위</div>
           {% if seventh.is_rereleased %}
           <div class="check">확정</div>
@@ -209,7 +209,7 @@
         </div>
       </div>
       <div class="p8">
-        <div class="wrapper">
+        <div class="wrapper">        
           <div class="count">8위</div>
           {% if eighth.is_rereleased %}
           <div class="check">확정</div>
@@ -232,7 +232,7 @@
         </div>
       </div>
       <div class="p9">
-        <div class="wrapper">
+        <div class="wrapper">          
           <div class="count">9위</div>
           {% if ninth.is_rereleased %}
           <div class="check">확정</div>
@@ -281,7 +281,7 @@
       </div>
     </div>
   </div>
-  <div id="gorecommand">
+  <div id="gorecommend">
     <p>TOP 10 외에 재개봉을 원하는 영화가 있다면?</p>
     <p>영화를 찾아 추천해주세요!</p>
   </div>
@@ -297,5 +297,4 @@
     }
   }
 </script>
-
 </html>
