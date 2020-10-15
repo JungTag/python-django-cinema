@@ -3,51 +3,8 @@
   background-color: black;
   font: normal normal bold 14px Helvetica Neue LT Std;
   color: #E5E5E5;
-
-/* notice */
-html,
-body {
-  width: 100%;
-  height: 100%;
 }
 
-.notice {
-  text-align: center;
-  height: 100%;
-  position: relative;
-}
-
-.notice .notice-content {
-  margin: 0;
-  width: 100%;
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translate(-50%, 0%);
-}
-
-.notice-content h2 {
-  font-size: 40px;
-}
-
-.notice-content h1 {
-  font-size: 60px;
-}
-
-
-@media screen and (max-width: 960px){
-  .notice-content h2 {
-    font-size: 30px;
-  }
-  .notice-content h1{
-    font-size: 50px;
-    }
-  }
-
-
-
-
-/* notice */
 /* navbar */
 #navbar {
   height: 60px;
@@ -660,4 +617,5 @@ font-size: 18px;
     border-radius: 5px;
     display: inline-block;
   }
+
 
