@@ -3,7 +3,19 @@
   background-color: black;
   font: normal normal bold 14px Helvetica Neue LT Std;
   color: #E5E5E5;
+}
 
+/* navbar */
+#navbar {
+  height: 60px;
+  background: #1D1D1F 0% 0% no-repeat padding-box;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  text-align: center;
 }
 
 h3 {
@@ -605,4 +617,5 @@ font-size: 18px;
     border-radius: 5px;
     display: inline-block;
   }
+
 
