@@ -133,36 +133,43 @@ def signup(request):
     if request.method == 'POST':
         if request.POST['password1'] == request.POST['password2']:
             try:
-                user = User.objects.get(username =request.POST['username'])
+                user = User.objects.get(username=request.POST['username'])
                 return render(request, 'signup.html', {'error' : '이미 사용중인 아이디입니다.'})
 
-            except User.DoesNotExist:
-                user = User.objects.create_user(
-                    username = request.POST['username'],
-                    password = request.POST['password1'],
-                    email = request.POST['email_address'],
-                )
+            except:
 
-                userextension = UserExtension()
-                userextension.user = user
-                userextension.location = request.POST['location']
-                user.is_active = False
-                user.save()
-                userextension.save()
+                try:
+                    user = User.objects.get(email=request.POST['email_address'])
+                    return render(request, 'signup.html', {'error' : '이미 사용중인 이메일입니다.'})
 
-                current_site = get_current_site(request)
-                message = render_to_string('activation_email.html', {
-                    'user' : user,
-                    'domain' : current_site.domain,
-                    'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
-                    'token' : account_activation_token.make_token(user),
-                })
-                mail_title = "Confirm your Signup!"
-                mail_to = request.POST['email_address']
-                email = EmailMessage(mail_title, message, to=[mail_to])
-                email.send()
-                address = request.POST['email_address']
-                return render(request, 'validation_notice.html', {'address' : address})
+                except User.DoesNotExist:
+                    user = User.objects.create_user(
+                        username = request.POST['username'],
+                        password = request.POST['password1'],
+                        email = request.POST['email_address'],
+                    )
+
+                    userextension = UserExtension()
+                    userextension.user = user
+                    userextension.location = request.POST['location']
+                    user.is_active = False
+                    user.save()
+                    userextension.save()
+
+                    current_site = get_current_site(request)
+                    message = render_to_string('activation_email.html', {
+                        'user' : user,
+                        'domain' : current_site.domain,
+                        'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+                        'token' : account_activation_token.make_token(user),
+                    })
+                    mail_title = "Confirm your Signup!"
+                    mail_to = request.POST['email_address']
+                    email = EmailMessage(mail_title, message, to=[mail_to])
+                    email.send()
+                    address = request.POST['email_address']
+                    return render(request, 'validation_notice.html', {'address' : address})
+        
         else:
             return render(request, 'signup.html', {'error' : '비밀번호가 일치하지 않습니다.'})
         
@@ -175,8 +182,10 @@ def activate(request, uidb64, token):
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
+
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
+        user.save()
         return render(request, 'login.html', {'validation_success' : '이메일이 인증되었습니다. 다시 로그인하세요.'})
     else:
         return render(request, 'login.html', {'error' : '계정 활성화 오류'})
@@ -299,3 +308,5 @@ def deletion(request, movie_id):
 
 def validation_notice(request):
     return render(request, 'validation_notice.html')
+
+    
