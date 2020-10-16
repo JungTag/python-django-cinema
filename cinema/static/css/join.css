@@ -1,0 +1,122 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: black;
+}
+
+h3{
+    text-align: center;
+    font: normal normal bold 25px/29px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    color: #E5E5E5;
+    opacity: 1;
+    margin-top: 100px;;
+}
+/*button*/
+
+.submitbtn{
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .button {
+      
+      border: 2px solid #141414;
+      border-radius: 29px;
+      background-color: #ffffff;
+      width: 100px;
+      height: 40px;
+      font-size: 15px;
+      outline: none;
+      
+      
+     
+  }  
+
+/*login*/
+
+
+.logincontainer {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  .logincontainer input:focus {
+      outline: none;
+      
+
+  }
+  .loginbox {
+
+    background-color: transparent;
+    border: 3px solid #ffffff;
+    border-radius: 21px;
+    opacity: 1;
+    width: 327px;
+    height: 42px;
+    text-align: left;
+    padding-left: 10px;
+    font: normal normal normal 15px/18px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    color: #141414;
+
+
+    
+  }
+
+  
+  .loginbox::placeholder {
+    text-align: left;
+    padding-left: 10px;
+    font: normal normal normal 15px/18px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    color: #ffffff;
+    opacity: 1;
+    
+  }
+
+  .locationcontainer{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .location{
+  
+    border: 2px solid #ffffff;
+    border-radius: 21px;
+   
+    width: 327px;
+    height: 42px;
+    text-align: left;
+    padding-left: 10px;
+    font: normal normal normal 15px/18px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    color: #141414;
+
+  }
+
+    
+  .location::placeholder {
+    text-align: left;
+    padding-left: 10px;
+    font: normal normal normal 15px/18px Helvetica Neue LT Std;
+    letter-spacing: 0px;
+    color: #141414;
+    opacity: 1; 
+  }
+
+  .error {
+    text-align: center;
+    color: #ffffff;
+    font-size: 19px;
+    margin-top: 20px;
+}
+
+input:focus {
+    outline: none;
+  }
