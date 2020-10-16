@@ -21,8 +21,8 @@ import staff.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', user.views.main, name='main'),
-    path('update/', user.views.update_DB, name='db'),
-    path('genre/', user.views.make_genre, name='genre'),
+    # path('update/', user.views.update_DB, name='db'),
+    # path('genre/', user.views.make_genre, name='genre'),
     path('login/', user.views.login, name='login'),
     path('logout/', user.views.logout, name='logout'),
     path('signup/', user.views.signup, name='signup'),
