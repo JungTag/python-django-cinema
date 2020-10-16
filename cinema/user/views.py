@@ -14,6 +14,7 @@ import asyncio
 from django.http import HttpResponse
 from django.db.models import Max
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 import random
 from django.db.models import Q
 
@@ -286,6 +287,7 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
+@staff_member_required
 def re_release(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
     if not movie.is_rereleased:
@@ -296,6 +298,7 @@ def re_release(request, movie_id):
 
     return redirect('detail', movie_id = movie.id)
 
+@staff_member_required
 def deletion(request, movie_id):
     movie = Movie.objects.get(id=movie_id)
     if not movie.is_excepted:

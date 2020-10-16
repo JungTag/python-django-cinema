@@ -420,6 +420,7 @@ input:focus {
   .instagram {
     vertical-align: middle;
     margin-left: 10px;
+    border-radius: 8px;
   }
 
 .wrapper {
