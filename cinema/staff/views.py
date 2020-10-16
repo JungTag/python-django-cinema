@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from user.models import UserExtension, Movie, Genre
 import json
 from django.db.models import Max
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
+@staff_member_required
 def total(request):
     movie_list = []
     vote_count = []
@@ -14,6 +16,7 @@ def total(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'total.html', context=context)
 
+@staff_member_required
 def seoul(request):
     movie_list = []
     vote_count = []
@@ -24,6 +27,7 @@ def seoul(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'seoul.html', context=context)
 
+@staff_member_required
 def north_gyeongi(request):
     movie_list = []
     vote_count = []
@@ -34,6 +38,7 @@ def north_gyeongi(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'north_gyeongi.html', context=context)
 
+@staff_member_required
 def south_gyeongi(request):
     movie_list = []
     vote_count = []
@@ -44,6 +49,7 @@ def south_gyeongi(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'south_gyeongi.html', context=context)        
 
+@staff_member_required
 def incheon(request):
     movie_list = []
     vote_count = []
@@ -54,6 +60,7 @@ def incheon(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'incheon.html', context=context)
 
+@staff_member_required
 def gangwon(request):
     movie_list = []
     vote_count = []
@@ -64,6 +71,7 @@ def gangwon(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'gangwon.html', context=context)
 
+@staff_member_required
 def daejeon(request):
     movie_list = []
     vote_count = []
@@ -74,6 +82,7 @@ def daejeon(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'daejeon.html', context=context)
 
+@staff_member_required
 def chungcheong(request):
     movie_list = []
     vote_count = []
@@ -84,6 +93,7 @@ def chungcheong(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'chungcheong.html', context=context)
 
+@staff_member_required
 def daegu(request):
     movie_list = []
     vote_count = []
@@ -94,6 +104,7 @@ def daegu(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'daegu.html', context=context)
 
+@staff_member_required
 def busan(request):
     movie_list = []
     vote_count = []
@@ -104,6 +115,7 @@ def busan(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'busan.html', context=context)
 
+@staff_member_required
 def ulsan(request):
     movie_list = []
     vote_count = []
@@ -113,7 +125,8 @@ def ulsan(request):
         vote_count.append(int(ordered_movies[i].Ulsan))
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'ulsan.html', context=context)
-    
+
+@staff_member_required    
 def gyeongsang(request):
     movie_list = []
     vote_count = []
@@ -123,7 +136,8 @@ def gyeongsang(request):
         vote_count.append(int(ordered_movies[i].GyeongSang))
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'gyeongsang.html', context=context)
-    
+
+@staff_member_required    
 def gwangju(request):
     movie_list = []
     vote_count = []
@@ -134,6 +148,7 @@ def gwangju(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'gwangju.html', context=context)
 
+@staff_member_required
 def jeonra(request):
     movie_list = []
     vote_count = []
@@ -144,6 +159,7 @@ def jeonra(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'jeonra.html', context=context)
 
+@staff_member_required
 def jeju(request):
     movie_list = []
     vote_count = []
@@ -154,7 +170,7 @@ def jeju(request):
     context = {'vote_count' : json.dumps(vote_count), 'movie_list' : json.dumps(movie_list)}
     return render(request, 'jeju.html', context=context)
 
-
+@staff_member_required
 def staff_main(request):
     if 'query' in request.GET:
         query = request.GET['query']
@@ -172,6 +188,7 @@ def staff_main(request):
 
     return render(request, 'staff_main.html', {'results' : results, 'is_searched' : is_searched})
 
+@staff_member_required
 def reset(request):
     max_id = Movie.objects.all().aggregate(max_id=Max('id'))['max_id']
     for i in range(1, max_id+1):
