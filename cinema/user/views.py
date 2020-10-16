@@ -161,7 +161,7 @@ def signup(request):
                     message = render_to_string('activation_email.html', {
                         'user' : user,
                         'domain' : current_site.domain,
-                        'uid' : urlsafe_base64_encode(force_bytes(user.pk)),
+                        'uid' : user.pk,
                         'token' : account_activation_token.make_token(user),
                     })
                     mail_title = "Confirm your Signup!"
@@ -179,7 +179,7 @@ def signup(request):
 
 def activate(request, uidb64, token):
     try:
-        uid = force_text(urlsafe_base64_decode(uidb64))
+        uid = uidb64
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
