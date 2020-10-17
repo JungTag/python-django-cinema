@@ -44,7 +44,7 @@
   <div class="movies">
     {% for key, vals in results.items %}
     <div class="container">
-      <h1 class="tagname">{{key}}</h1>
+      <h1 class="tagname" style="font-size: 2em;">{{key}}</h1>
       {% for val in vals %}
       <div class="recommend_items">
         <div class="recommend-wrap">
@@ -62,6 +62,8 @@
             <input type="hidden" name="next" value="{{ request.path }}">
             {% if user.is_authenticated and not val.is_excepted and not user.is_staff %}
             <button type="submit">투표하기</button>
+            {% elif not user.is_authenticated %}
+            <button type="submit" onclick="alertVote()">투표하기</button>  
             {% else %}
             <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% endif %}
@@ -98,6 +100,8 @@
           <input type="hidden" name="next" value="{{ request.path }}">
           {% if user.is_authenticated and not result.is_excepted and not user.is_staff %}
           <button type="submit">투표하기</button>
+          {% elif not user.is_authenticated %}
+          <button type="submit" onclick="alertVote()">투표하기</button>  
           {% else %}
           <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
           {% endif %}
@@ -110,6 +114,11 @@
   {% endif %}
 </body>
 <script>
+  function alertVote() {
+    var alertToVisiter = alert('로그인 후에 이용해주시기 바랍니다.');
+    event.preventDefault();
+  }
+
   function confirmVote() {
     var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
     if (!isValid) {
