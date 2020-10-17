@@ -28,12 +28,11 @@
       <li><a href="{% url 'signup' %}">회원가입</a></li>
       {% endif %}
     </ul>
-  </div>
-  </div>
+</div>
 
   <div id="searchbar">
     <form method='GET' action="{% url 'recommend' %}">
-      <input type="text" name='query' placeholder="영화명을 입력해 주세요">
+      <input type="text" name='query' placeholder="영화명을 입력해 주세요" style="background-image: url({% static 'images/search.png' %}); background-repeat:no-repeat; background-size:33px; background-position: 15px;"  >
     </form>
   </div>
   {% if is_searched == False %}
@@ -75,7 +74,7 @@
     {% endfor %}
   </div>
   {% else %}
-  <!-- 검색어 받았을 때 -->
+  <!— 검색어 받았을 때 —>
 
   <div id="title">
     <h3>"{{query}}"에 대한 검색 결과입니다.</h3>

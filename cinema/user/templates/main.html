@@ -10,7 +10,7 @@
 
 
 <body>
-  <div id="navbar">
+<div id="navbar">
     <ul id="left-nav">
     <li><a href="https://docs.google.com/presentation/d/1Hv5hKFQxH5U_CdWVXhC6mIyLMqjJxO009KEJIDX2WLU/edit?usp=sharing">프로젝트 소개</a></li>
     <li><a href="https://github.com/JungTag/Cinema">GitHub</a></li>
@@ -26,10 +26,10 @@
       <li><a href="{% url 'logout' %}">로그아웃</a></li>
       {% else %}
       <li><a href="{% url 'login' %}">로그인</a></li>
-      <li><a href="{% url 'signup' %}"></a></li>
+      <li><a href="{% url 'signup' %}">회원가입</a></li>
       {% endif %}
     </ul>
-  </div>
+</div>
   <div class="bar">
     <a href="https://www.instagram.com/lottecinema_official/?hl=ko" target="_blank">재개봉 확인은 롯데시네마 인스타그램에서 <img class="instagram" src="{% static 'images/instagram.png' %}" height=30px;></a>
   </div>
@@ -303,7 +303,7 @@
   </div>
   <div id="gorecommend">
     <p>TOP 10 외에 재개봉을 원하는 영화가 있다면?</p>
-    <p>영화를 찾아 추천해주세요!</p>
+    <p>영화를 찾아 투표해주세요!</p>
   </div>
   <div id="mainsearchbar">
     <a href="{% url 'recommend' %}">더 많은 영화 찾아보기</a>

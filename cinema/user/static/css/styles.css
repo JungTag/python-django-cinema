@@ -461,6 +461,11 @@ input:focus {
 .movietitle {
   font-size: 15px;
   margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 184px;
+  height: 20px;
 }
 
 .main_movies .c2 {
