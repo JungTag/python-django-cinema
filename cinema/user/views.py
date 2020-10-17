@@ -189,7 +189,7 @@ def activate(request, uidb64, token):
         user.save()
         return render(request, 'login.html', {'validation_success' : '이메일이 인증되었습니다. 다시 로그인하세요.'})
     else:
-        return render(request, 'login.html', {'error' : '계정 활성화 오류'})
+        return render(request, 'login.html', {'error' : '이미 인증된 계정이거나 토큰이 유효하지 않습니다.'})
 
 
 def get_random_movies(*nums):
