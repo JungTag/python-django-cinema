@@ -1,8 +1,0 @@
-myvenv
-.DS_Store
-secrets.json
-db.sqlite3
-__pycache__
-*.log
-*.pot
-*.pyc
