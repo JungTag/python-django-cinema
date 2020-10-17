@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div id="navbar">
+<div id="navbar">
     <ul id="left-nav">
     <li><a href="https://docs.google.com/presentation/d/1Hv5hKFQxH5U_CdWVXhC6mIyLMqjJxO009KEJIDX2WLU/edit?usp=sharing">프로젝트 소개</a></li>
     <li><a href="https://github.com/JungTag/Cinema">GitHub</a></li>
@@ -29,7 +29,7 @@
       <li><a href="{% url 'signup' %}">회원가입</a></li>
       {% endif %}
     </ul>
-  </div>
+</div>
     <div class="bar">
     <a href="https://www.instagram.com/lottecinema_official/?hl=ko" target="_blank">재개봉 확인은 롯데시네마 인스타그램에서 <img class="instagram" src="{% static 'images/instagram.png' %}" height=30px;></a>
   </div>
@@ -54,6 +54,8 @@
               <input type="hidden" name="movie_id" value="{{ movie.id }}">
               {% if user.is_authenticated and not movie.is_excepted and not user.is_staff %}
               <button type="submit">투표하기</button>
+              {% elif not user.is_authenticated %}
+              <button type="submit" onclick="alertVote()">투표하기</button>  
               {% else %}
               <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
               {% endif %}
@@ -104,8 +106,9 @@
           <div><span class="content">상영시간:</span><span class="runningtime">{{movie.running_time}} 분</span></div><br>
           <div><span class="content">연령등급:</span><span class="age">{{movie.grade}}</span></div><br>
           <div><span class="content">배우:</span><span class="actor">{{movie.actor}}</span></div><br>
+          <div><span class="content">평점:</span><span class="grade">{{movie.score}}</span></div><br>
           <div><span class="content-intro">소개:</span><br><br>
-            <span class="intro">{{movie.description}}</span></div><br>
+            <span class="intro" style="line-height:1.5em;">{{movie.description}}</span></div><br>
         </div>
       </div>
     </div>
@@ -114,6 +117,11 @@
 
 </body>
 <script>
+  function alertVote() {
+    var alertToVisiter = alert('로그인 후에 이용해주시기 바랍니다.');
+    event.preventDefault();
+  }
+  
   function confirmVote() {
     var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
     if (!isValid) {

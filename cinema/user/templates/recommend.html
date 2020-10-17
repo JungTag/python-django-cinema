@@ -28,12 +28,11 @@
       <li><a href="{% url 'signup' %}">회원가입</a></li>
       {% endif %}
     </ul>
-  </div>
-  </div>
+</div>
 
   <div id="searchbar">
     <form method='GET' action="{% url 'recommend' %}">
-      <input type="text" name='query' placeholder="영화명을 입력해 주세요">
+      <input type="text" name='query' placeholder="영화명을 입력해 주세요" style="background-image: url({% static 'images/search.png' %}); background-repeat:no-repeat; background-size:33px; background-position: 15px;"  >
     </form>
   </div>
   {% if is_searched == False %}
@@ -44,7 +43,7 @@
   <div class="movies">
     {% for key, vals in results.items %}
     <div class="container">
-      <h1 class="tagname">{{key}}</h1>
+      <h1 class="tagname" style="font-size: 2em;">{{key}}</h1>
       {% for val in vals %}
       <div class="recommend_items">
         <div class="recommend-wrap">
@@ -62,6 +61,8 @@
             <input type="hidden" name="next" value="{{ request.path }}">
             {% if user.is_authenticated and not val.is_excepted and not user.is_staff %}
             <button type="submit">투표하기</button>
+            {% elif not user.is_authenticated %}
+            <button type="submit" onclick="alertVote()">투표하기</button>  
             {% else %}
             <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% endif %}
@@ -73,7 +74,7 @@
     {% endfor %}
   </div>
   {% else %}
-  <!-- 검색어 받았을 때 -->
+  <!— 검색어 받았을 때 —>
 
   <div id="title">
     <h3>"{{query}}"에 대한 검색 결과입니다.</h3>
@@ -98,6 +99,8 @@
           <input type="hidden" name="next" value="{{ request.path }}">
           {% if user.is_authenticated and not result.is_excepted and not user.is_staff %}
           <button type="submit">투표하기</button>
+          {% elif not user.is_authenticated %}
+          <button type="submit" onclick="alertVote()">투표하기</button>  
           {% else %}
           <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
           {% endif %}
@@ -110,6 +113,11 @@
   {% endif %}
 </body>
 <script>
+  function alertVote() {
+    var alertToVisiter = alert('로그인 후에 이용해주시기 바랍니다.');
+    event.preventDefault();
+  }
+
   function confirmVote() {
     var isValid = confirm('투표하시겠습니까? (중복 투표는 집계에서 제외됩니다)');
     if (!isValid) {
