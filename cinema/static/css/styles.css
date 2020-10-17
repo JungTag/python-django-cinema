@@ -458,6 +458,11 @@ input:focus {
   
 }
 
+.movietitle {
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
 .main_movies .c2 {
   display:inline-block;
   margin-bottom: 50px;
