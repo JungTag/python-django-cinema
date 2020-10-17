@@ -52,12 +52,12 @@
               {% csrf_token %}
               <input type="hidden" name="next" value="{{ request.path }}">
               <input type="hidden" name="movie_id" value="{{ movie.id }}">
-              {% if user.is_authenticated and not movie.is_excepted and not user.is_staff %}
-              <button type="submit">투표하기</button>
-              {% elif not user.is_authenticated %}
-              <button type="submit" onclick="alertVote()">투표하기</button>  
-              {% else %}
+              {% if movie.is_excepted or user.is_staff %}
               <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+              {% elif not user.is_authenticated %}
+              <button type="submit" onclick="alertVote()">투표하기</button>
+              {% else %}
+              <button type="submit">투표하기</button>
               {% endif %}
             </form>
           </div><br>

@@ -56,12 +56,12 @@
           <form action="{% url 'vote' first.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not first.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
+            {% if first.is_excepted or user.is_staff %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% elif not user.is_authenticated %}
             <button type="submit" onclick="alertVote()">투표하기</button>
             {% else %}
-            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -81,12 +81,12 @@
           <form action="{% url 'vote' second.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not second.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
-            {% elif not user.is_authenticated %}
-            <button type="submit" onclick="alertVote()">투표하기</button>            
-            {% else %}
+            {% if second.is_excepted or user.is_staff %}
             <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% elif not user.is_authenticated %}
+            <button type="submit" onclick="alertVote()">투표하기</button>
+            {% else %}
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -106,12 +106,12 @@
           <form action="{% url 'vote' third.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not third.is_excepted and not user.is_staff  %}
-            <button type="submit">투표하기</button>
+            {% if third.is_excepted or user.is_staff %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% elif not user.is_authenticated %}
             <button type="submit" onclick="alertVote()">투표하기</button>
             {% else %}
-            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -132,12 +132,12 @@
           <form action="{% url 'vote' fourth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not fourth.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
+            {% if fourth.is_excepted or user.is_staff %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% elif not user.is_authenticated %}
             <button type="submit" onclick="alertVote()">투표하기</button>
             {% else %}
-            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -158,12 +158,12 @@
           <form action="{% url 'vote' fifth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not fifth.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
+            {% if fifth.is_excepted or user.is_staff %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% elif not user.is_authenticated %}
             <button type="submit" onclick="alertVote()">투표하기</button>
             {% else %}
-            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -186,12 +186,12 @@
           <form action="{% url 'vote' sixth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not sixth.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
+            {% if sixth.is_excepted or user.is_staff %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% elif not user.is_authenticated %}
             <button type="submit" onclick="alertVote()">투표하기</button>
             {% else %}
-            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -212,12 +212,12 @@
           <form action="{% url 'vote' seventh.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not seventh.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
+            {% if seventh.is_excepted or user.is_staff %}
+            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
             {% elif not user.is_authenticated %}
             <button type="submit" onclick="alertVote()">투표하기</button>
             {% else %}
-            <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -237,12 +237,12 @@
           <form action="{% url 'vote' eighth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not eighth.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
-            {% elif not user.is_authenticated %}
-            <button type="submit" onclick="alertVote()">투표하기</button>            
-            {% else %}
+            {% if eighth.is_excepted or user.is_staff %}
             <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% elif not user.is_authenticated %}
+            <button type="submit" onclick="alertVote()">투표하기</button>
+            {% else %}
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -263,12 +263,12 @@
           <form action="{% url 'vote' ninth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not ninth.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
-            {% elif not user.is_authenticated %}
-            <button type="submit" onclick="alertVote()">투표하기</button>            
-            {% else %}
+            {% if ninth.is_excepted or user.is_staff %}
             <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% elif not user.is_authenticated %}
+            <button type="submit" onclick="alertVote()">투표하기</button>
+            {% else %}
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
@@ -289,12 +289,12 @@
           <form action="{% url 'vote' tenth.id %}" method="POST" onsubmit="confirmVote()">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.path }}">
-            {% if user.is_authenticated and not tenth.is_excepted and not user.is_staff %}
-            <button type="submit">투표하기</button>
-            {% elif not user.is_authenticated %}
-            <button type="submit" onclick="alertVote()">투표하기</button>            
-            {% else %}
+            {% if tenth.is_excepted or user.is_staff %}
             <button style="background-color: darkgray; opacity: 0.5;" type="submit" disabled>투표하기</button>
+            {% elif not user.is_authenticated %}
+            <button type="submit" onclick="alertVote()">투표하기</button>
+            {% else %}
+            <button type="submit">투표하기</button>
             {% endif %}
           </form>
         </div>
